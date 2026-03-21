@@ -10,6 +10,7 @@ export default function ProductDetails() {
   const { addToCart } = useCart();
   const [activeImg, setActiveImg] = useState(0);
   const [added, setAdded] = useState(false);
+  const [selectedColor, setSelectedColor] = useState(product?.colors?.[0] || "");
 
   if (!product) {
     return (
@@ -21,16 +22,16 @@ export default function ProductDetails() {
   }
 
   const whatsappMsg = encodeURIComponent(
-    `Hello, I want to buy ${product.name} for KSh ${product.price.toLocaleString()}`
+    `Hello, I want to buy ${product.name} (Color: ${selectedColor}) for KSh ${product.price.toLocaleString()}`
   );
-  const whatsappUrl = `https://wa.me/25479162499?text=${whatsappMsg}`;
+  const whatsappUrl = `https://wa.me/254747622490?text=${whatsappMsg}`;
 
   const related = products
     .filter((p) => p.category === product.category && p.id !== product.id)
     .slice(0, 4);
 
   function handleAddToCart() {
-    addToCart(product);
+    addToCart(product, selectedColor);
     setAdded(true);
     setTimeout(() => setAdded(false), 2000);
   }
@@ -98,6 +99,29 @@ export default function ProductDetails() {
               <p>Category: <span className="text-charcoal/60 capitalize">{product.category}</span></p>
               <p>SKU: <span className="text-charcoal/60">WL-{String(product.id).padStart(4, "0")}</span></p>
             </div>
+
+            {product.colors && product.colors.length > 0 && (
+              <div className="mt-6">
+                <p className="text-xs tracking-[0.2em] uppercase text-charcoal/60 mb-3">
+                  Color: <span className="text-charcoal">{selectedColor}</span>
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {product.colors.map((color) => (
+                    <button
+                      key={color}
+                      onClick={() => setSelectedColor(color)}
+                      className={`px-4 py-2 text-xs tracking-wider border transition-all duration-300 ${
+                        selectedColor === color
+                          ? "border-gold bg-gold/10 text-charcoal"
+                          : "border-charcoal/20 text-charcoal/60 hover:border-charcoal/40"
+                      }`}
+                    >
+                      {color}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
 
             <div className="mt-10 flex flex-col sm:flex-row gap-4">
               <button

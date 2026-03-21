@@ -31,7 +31,7 @@ export default function Checkout() {
 
     const msg = encodeURIComponent(
       `Hello, I'd like to place an order:\n\n` +
-      items.map((item) => `${item.name} x${item.qty} = KSh ${(item.price * item.qty).toLocaleString()}`).join("\n") +
+      items.map((item) => `${item.name}${item.color ? ` (${item.color})` : ""} x${item.qty} = KSh ${(item.price * item.qty).toLocaleString()}`).join("\n") +
       `\n\nTotal: KSh ${cartTotal.toLocaleString()}` +
       `\n\nName: ${form.name}` +
       `\nPhone: ${form.phone}` +
@@ -39,7 +39,7 @@ export default function Checkout() {
     );
 
     clearCart();
-    window.open(`https://wa.me/25479162499?text=${msg}`, "_blank");
+    window.open(`https://wa.me/254747622490?text=${msg}`, "_blank");
   };
 
   return (
@@ -109,13 +109,14 @@ export default function Checkout() {
               <h2 className="font-serif text-lg text-charcoal mb-6">Order Summary</h2>
               <div className="space-y-4">
                 {items.map((item) => (
-                  <div key={item.id} className="flex gap-3">
+                  <div key={item.cartKey} className="flex gap-3">
                     <div className="w-14 h-16 flex-shrink-0 bg-cream-dark overflow-hidden">
                       <img src={item.images[0]} alt={item.name} className="w-full h-full object-cover" />
                     </div>
                     <div className="flex-1 flex justify-between">
                       <div>
                         <p className="text-sm text-charcoal">{item.name}</p>
+                        {item.color && <p className="text-xs text-charcoal/40">{item.color}</p>}
                         <p className="text-xs text-charcoal/40">Qty: {item.qty}</p>
                       </div>
                       <p className="text-sm text-charcoal">

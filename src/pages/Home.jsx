@@ -135,7 +135,7 @@ export default function Home() {
         <SectionHeading title="Follow the Luxe Life" subtitle="Stay inspired — join us on social media" />
         <div className="flex justify-center gap-8">
           <a
-            href="https://instagram.com"
+            href="https://www.instagram.com/wangareluxe?igsh=MWpmbDhqMno2OHY1ag=="
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col items-center gap-2 text-charcoal/60 hover:text-gold transition-colors"
@@ -144,7 +144,7 @@ export default function Home() {
             <span className="text-xs tracking-wider uppercase">Instagram</span>
           </a>
           <a
-            href="https://tiktok.com"
+            href="https://tiktok.com/@wangare.luxe?_t=ZM-8w2yg6CUQwp&_r=1"
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col items-center gap-2 text-charcoal/60 hover:text-gold transition-colors"
@@ -153,7 +153,7 @@ export default function Home() {
             <span className="text-xs tracking-wider uppercase">TikTok</span>
           </a>
           <a
-            href="https://wa.me/25479162499"
+            href="https://wa.me/254747622490"
             target="_blank"
             rel="noopener noreferrer"
             className="flex flex-col items-center gap-2 text-charcoal/60 hover:text-gold transition-colors"

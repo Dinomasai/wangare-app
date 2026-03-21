@@ -34,7 +34,7 @@ export default function Cart() {
         <div className="space-y-6">
           {items.map((item) => (
             <div
-              key={item.id}
+              key={item.cartKey}
               className="flex gap-5 bg-white/50 border border-beige/30 p-4 md:p-6 animate-fade-in"
             >
               <Link to={`/product/${item.id}`} className="flex-shrink-0 w-24 h-28 md:w-32 md:h-36 overflow-hidden bg-cream-dark">
@@ -46,6 +46,9 @@ export default function Cart() {
                   <Link to={`/product/${item.id}`} className="font-serif text-base md:text-lg text-charcoal hover:text-gold transition-colors">
                     {item.name}
                   </Link>
+                  {item.color && (
+                    <p className="text-xs text-charcoal/40 mt-0.5">Color: {item.color}</p>
+                  )}
                   <p className="text-sm text-charcoal/50 mt-1">
                     KSh {item.price.toLocaleString()}
                   </p>
@@ -55,7 +58,7 @@ export default function Cart() {
                   {/* Quantity */}
                   <div className="flex items-center border border-charcoal/20">
                     <button
-                      onClick={() => updateQty(item.id, item.qty - 1)}
+                      onClick={() => updateQty(item.cartKey, item.qty - 1)}
                       className="w-8 h-8 flex items-center justify-center text-charcoal/60 hover:text-charcoal transition-colors"
                     >
                       &minus;
@@ -64,7 +67,7 @@ export default function Cart() {
                       {item.qty}
                     </span>
                     <button
-                      onClick={() => updateQty(item.id, item.qty + 1)}
+                      onClick={() => updateQty(item.cartKey, item.qty + 1)}
                       className="w-8 h-8 flex items-center justify-center text-charcoal/60 hover:text-charcoal transition-colors"
                     >
                       +
@@ -76,7 +79,7 @@ export default function Cart() {
                       KSh {(item.price * item.qty).toLocaleString()}
                     </p>
                     <button
-                      onClick={() => removeFromCart(item.id)}
+                      onClick={() => removeFromCart(item.cartKey)}
                       className="text-charcoal/30 hover:text-red-500 transition-colors"
                       aria-label="Remove item"
                     >
