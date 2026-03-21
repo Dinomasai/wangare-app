@@ -1,16 +1,75 @@
-# React + Vite
+# Wangaré Luxe
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A luxury e-commerce web application for a Kenyan fashion brand specializing in high-end bags and accessories. Built with React and Vite, the app delivers a premium shopping experience celebrating African artistry and craftsmanship.
 
-Currently, two official plugins are available:
+> "Luxury in Every Detail"
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **Home** — Hero section, featured collection carousel, new arrivals, and brand story
+- **Shop** — Browse all products with filtering and sorting
+- **Product Details** — Individual product view with images, pricing, and add-to-cart
+- **Cart** — Manage cart items, update quantities, and remove products
+- **Checkout** — Complete the purchase flow
+- **Reels** — Social media video content showcase
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Tech Stack
 
-## Expanding the ESLint configuration
+- [React 19](https://react.dev/) — UI library
+- [React Router DOM 7](https://reactrouter.com/) — Client-side routing
+- [Tailwind CSS 4](https://tailwindcss.com/) — Utility-first styling
+- [Vite 8](https://vite.dev/) — Build tool with HMR
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm
+
+### Installation
+
+```bash
+git clone https://github.com/your-username/wangare-app.git
+cd wangare-app
+npm install
+```
+
+### Development
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+### Build
+
+```bash
+npm run build
+```
+
+### Preview Production Build
+
+```bash
+npm run preview
+```
+
+### Lint
+
+```bash
+npm run lint
+```
+
+## Project Structure
+
+```
+src/
+├── assets/          # Images and static assets
+├── components/      # Reusable components (Navbar, Footer, ProductCard)
+├── context/         # React Context (CartContext)
+├── data/            # Product data
+├── pages/           # Route-level pages (Home, Shop, ProductDetails, Cart, Checkout, Reels)
+├── App.jsx
+└── main.jsx
+```
