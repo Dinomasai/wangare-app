@@ -3,7 +3,7 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 import productsRouter from "./routes/products.js";
-import mpesaRouter from "./routes/mpesa.js";
+import pesapalRouter from "./routes/pesapal.js";
 import adminRouter from "./routes/admin.js";
 import reelsRouter from "./routes/reels.js";
 import ordersRouter from "./routes/orders.js";
@@ -23,7 +23,7 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // API routes
 app.use("/api/products", productsRouter);
 app.use("/api/reels", reelsRouter);
-app.use("/api/mpesa", mpesaRouter);
+app.use("/api/payments", pesapalRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/orders", ordersRouter);
 

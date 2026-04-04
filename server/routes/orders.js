@@ -35,8 +35,12 @@ router.post("/", (req, res) => {
     customer, // { name, phone, location }
     items,    // [{ id, name, price, qty, color, size }]
     total,
-    paymentMethod: paymentMethod || "mpesa",
+    paymentMethod: paymentMethod || "pesapal",
     status: "pending",
+    pesapalOrderTrackingId: null,
+    pesapalMerchantReference: null,
+    pesapalTransactionStatus: null,
+    pesapalPaymentMethod: null,
     createdAt: new Date().toISOString(),
   };
 
