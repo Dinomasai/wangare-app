@@ -35,10 +35,40 @@ cd wangare-app
 npm install
 ```
 
+### Environment Setup
+
+Copy `.env.example` to `.env` and fill in your values:
+
+```bash
+cp .env.example .env
+```
+
+| Variable | Description |
+|----------|-------------|
+| `PORT` | Backend server port (default: 4000) |
+| `JWT_SECRET` | Secret for admin JWT signing |
+| `PESAPAL_CONSUMER_KEY` | From Pesapal developer dashboard |
+| `PESAPAL_CONSUMER_SECRET` | From Pesapal developer dashboard |
+| `PESAPAL_ENV` | `sandbox` for testing, `live` for production |
+| `PESAPAL_IPN_URL` | Public URL for Pesapal IPN notifications (`/api/payments/ipn`) |
+| `PESAPAL_CALLBACK_URL` | Public URL where Pesapal redirects after payment (`/payment/status`) |
+| `PESAPAL_IPN_ID` | IPN ID from Pesapal (auto-registered if blank) |
+
+For local development, use [ngrok](https://ngrok.com/) to expose the backend:
+
+```bash
+ngrok http 4000
+# Then set PESAPAL_IPN_URL and PESAPAL_CALLBACK_URL to your ngrok URL
+```
+
 ### Development
 
 ```bash
+# Terminal 1 — Frontend (Vite dev server, port 5173)
 npm run dev
+
+# Terminal 2 — Backend (Express, port 4000)
+npm run server
 ```
 
 Open [http://localhost:5173](http://localhost:5173) in your browser.
@@ -61,15 +91,33 @@ npm run preview
 npm run lint
 ```
 
+## Payments
+
+Checkout is powered by **Pesapal v3**, supporting M-Pesa, Visa, Mastercard, and other payment methods.
+
+**Payment flow:**
+1. Customer fills checkout form and clicks Pay
+2. Backend creates an order and initiates a Pesapal session
+3. Customer is redirected to Pesapal's secure payment page
+4. After payment, Pesapal redirects back to `/payment/status`
+5. Payment status is confirmed and displayed to the customer
+
 ## Project Structure
 
 ```
 src/
 ├── assets/          # Images and static assets
 ├── components/      # Reusable components (Navbar, Footer, ProductCard)
-├── context/         # React Context (CartContext)
+├── context/         # React Context (CartContext, AdminContext)
 ├── data/            # Product data
-├── pages/           # Route-level pages (Home, Shop, ProductDetails, Cart, Checkout, Reels)
+├── pages/           # Route-level pages
+├── types/           # JSDoc type definitions
+├── api.js           # Centralized API client
 ├── App.jsx
 └── main.jsx
+
+server/
+├── routes/          # Express route handlers
+├── services/        # Business logic (Pesapal service)
+└── data/            # JSON flat-file store (orders, products, reels)
 ```

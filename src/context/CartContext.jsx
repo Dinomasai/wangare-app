@@ -5,26 +5,27 @@ const CartContext = createContext();
 export function CartProvider({ children }) {
   const [items, setItems] = useState([]);
 
-  const addToCart = useCallback((product) => {
+  const addToCart = useCallback((product, color, size) => {
     setItems((prev) => {
-      const existing = prev.find((item) => item.id === product.id);
+      const cartKey = `${product.id}-${color || ""}-${size || ""}`;
+      const existing = prev.find((item) => item.cartKey === cartKey);
       if (existing) {
         return prev.map((item) =>
-          item.id === product.id ? { ...item, qty: item.qty + 1 } : item
+          item.cartKey === cartKey ? { ...item, qty: item.qty + 1 } : item
         );
       }
-      return [...prev, { ...product, qty: 1 }];
+      return [...prev, { ...product, color, size, cartKey, qty: 1 }];
     });
   }, []);
 
-  const removeFromCart = useCallback((id) => {
-    setItems((prev) => prev.filter((item) => item.id !== id));
+  const removeFromCart = useCallback((cartKey) => {
+    setItems((prev) => prev.filter((item) => item.cartKey !== cartKey));
   }, []);
 
-  const updateQty = useCallback((id, qty) => {
+  const updateQty = useCallback((cartKey, qty) => {
     if (qty < 1) return;
     setItems((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, qty } : item))
+      prev.map((item) => (item.cartKey === cartKey ? { ...item, qty } : item))
     );
   }, []);
 
