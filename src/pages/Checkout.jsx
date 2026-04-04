@@ -1,14 +1,14 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-import { initiateMpesa, queryMpesaStatus, createOrder } from "../api";
+import { createOrder, initiatePayment } from "../api";
 
 const OWNER_PHONE = "254747622490";
 
 export default function Checkout() {
   const { items, cartTotal, clearCart } = useCart();
-  const [form, setForm] = useState({ name: "", phone: "", location: "" });
-  const [status, setStatus] = useState(""); // "" | "sending" | "waiting" | "success" | "error"
+  const [form, setForm] = useState({ name: "", email: "", phone: "", location: "" });
+  const [status, setStatus] = useState(""); // "" | "sending" | "success" | "error"
   const [msg, setMsg] = useState("");
 
   if (items.length === 0 && status !== "success") {
@@ -25,15 +25,16 @@ export default function Checkout() {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  // Build the owner WhatsApp notification message
-  function buildOwnerMessage(orderDetails) {
-    const itemsList = (orderDetails || items)
+  function buildOwnerMessage(orderId) {
+    const itemsList = items
       .map((item) => `  - ${item.name}${item.color ? ` (${item.color})` : ""}${item.size ? ` Size ${item.size}` : ""} x${item.qty} = KSh ${(item.price * item.qty).toLocaleString()}`)
       .join("\n");
 
     return encodeURIComponent(
-      `NEW ORDER PAID via M-PESA\n\n` +
+      `NEW ORDER — Pesapal Payment Initiated\n\n` +
+      `Order ID: ${orderId}\n` +
       `Customer: ${form.name}\n` +
+      `Email: ${form.email}\n` +
       `Phone: ${form.phone}\n` +
       `Delivery: ${form.location}\n\n` +
       `Items:\n${itemsList}\n\n` +
@@ -41,78 +42,72 @@ export default function Checkout() {
     );
   }
 
-  // Save order + notify owner
-  const placeOrder = async (paymentStatus) => {
-    const orderItems = items.map((item) => ({
-      id: item.id, name: item.name, price: item.price,
-      qty: item.qty, color: item.color || "", size: item.size || "",
-    }));
-    await createOrder({
-      customer: { name: form.name, phone: form.phone, location: form.location },
-      items: orderItems,
-      total: cartTotal,
-      paymentMethod: "mpesa",
-    });
-    // WhatsApp notification to owner
-    const ownerMsg = buildOwnerMessage(items);
-    window.open(`https://wa.me/${OWNER_PHONE}?text=${ownerMsg}`, "_blank");
-    clearCart();
-    setStatus("success");
-    setMsg(paymentStatus === "confirmed"
-      ? "Payment successful! Your order has been placed."
-      : "Your order has been placed. Payment is being processed.");
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!form.name) { setMsg("Please enter your name"); return; }
-    if (!form.phone) { setMsg("Please enter your phone number"); return; }
-    if (!form.location) { setMsg("Please enter delivery location"); return; }
+    if (!form.email) { setMsg("Please enter your email address"); return; }
+    if (!form.location) { setMsg("Please enter your delivery location"); return; }
 
     setStatus("sending");
     setMsg("");
 
     try {
-      const orderId = `ORD-${Date.now()}`;
-      const result = await initiateMpesa(form.phone, cartTotal, orderId);
+      // 1. Create order in database
+      const nameParts = form.name.trim().split(" ");
+      const firstName = nameParts[0];
+      const lastName = nameParts.slice(1).join(" ") || firstName;
 
-      if (result.success) {
-        setStatus("waiting");
-        setMsg("M-PESA prompt sent! Check your phone and enter your PIN to pay.");
+      const orderItems = items.map((item) => ({
+        id: item.id, name: item.name, price: item.price,
+        qty: item.qty, color: item.color || "", size: item.size || "",
+      }));
 
-        // Poll payment status
-        const checkoutRequestId = result.checkoutRequestId;
-        let attempts = 0;
-        const poll = setInterval(async () => {
-          attempts++;
-          try {
-            const query = await queryMpesaStatus(checkoutRequestId);
-            if (query.ResultCode === "0" || query.ResultCode === 0) {
-              clearInterval(poll);
-              await placeOrder("confirmed");
-            } else if (attempts >= 12) {
-              clearInterval(poll);
-              await placeOrder("processing");
-            }
-          } catch {
-            if (attempts >= 12) {
-              clearInterval(poll);
-              await placeOrder("processing");
-            }
-          }
-        }, 5000);
-      } else {
+      const order = await createOrder({
+        customer: { name: form.name, phone: form.phone, email: form.email, location: form.location },
+        items: orderItems,
+        total: cartTotal,
+        paymentMethod: "pesapal",
+      });
+
+      if (!order?.id) {
         setStatus("error");
-        setMsg("Could not send M-PESA prompt. Please check your phone number and try again.");
+        setMsg("Could not create your order. Please try again.");
+        return;
       }
+
+      // 2. Initiate Pesapal payment
+      const payment = await initiatePayment({
+        orderId: String(order.id),
+        amount: cartTotal,
+        currency: "KES",
+        description: `Payment for Wangaré Luxe order #${order.id}`,
+        customerEmail: form.email,
+        customerFirstName: firstName,
+        customerLastName: lastName,
+        customerPhone: form.phone || "",
+      });
+
+      if (!payment?.success || !payment?.data?.redirectUrl) {
+        setStatus("error");
+        setMsg(payment?.error || "Payment service unavailable. Please try again.");
+        return;
+      }
+
+      // 3. Notify owner via WhatsApp
+      const ownerMsg = buildOwnerMessage(order.id);
+      window.open(`https://wa.me/${OWNER_PHONE}?text=${ownerMsg}`, "_blank");
+
+      clearCart();
+
+      // 4. Redirect to Pesapal payment page
+      window.location.href = payment.data.redirectUrl;
     } catch {
       setStatus("error");
       setMsg("Payment service is temporarily unavailable. Please try again in a moment.");
     }
   };
 
-  // Success state
   if (status === "success") {
     return (
       <div className="pt-32 pb-20 min-h-screen text-center">
@@ -149,11 +144,18 @@ export default function Checkout() {
             </div>
 
             <div>
-              <label className="block text-xs tracking-[0.2em] uppercase text-charcoal/60 mb-2">M-PESA Phone Number</label>
-              <input type="tel" name="phone" required value={form.phone} onChange={handleChange}
+              <label className="block text-xs tracking-[0.2em] uppercase text-charcoal/60 mb-2">Email Address</label>
+              <input type="email" name="email" required value={form.email} onChange={handleChange}
+                className="w-full bg-transparent border border-charcoal/20 px-4 py-3 text-sm text-charcoal focus:outline-none focus:border-gold transition-colors"
+                placeholder="jane@example.com" />
+              <p className="text-xs text-charcoal/30 mt-1.5">Used for payment confirmation</p>
+            </div>
+
+            <div>
+              <label className="block text-xs tracking-[0.2em] uppercase text-charcoal/60 mb-2">Phone Number <span className="normal-case text-charcoal/30">(optional)</span></label>
+              <input type="tel" name="phone" value={form.phone} onChange={handleChange}
                 className="w-full bg-transparent border border-charcoal/20 px-4 py-3 text-sm text-charcoal focus:outline-none focus:border-gold transition-colors"
                 placeholder="0712 345 678" />
-              <p className="text-xs text-charcoal/30 mt-1.5">You'll receive an M-PESA prompt on this number</p>
             </div>
 
             <div>
@@ -166,49 +168,41 @@ export default function Checkout() {
             {/* Payment info */}
             <div className="border border-charcoal/10 p-5 mt-2">
               <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                  <span className="text-lg font-bold text-green-700">M</span>
+                <div className="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center">
+                  <span className="text-sm font-bold text-blue-700">PP</span>
                 </div>
                 <div>
-                  <p className="text-sm font-medium text-charcoal">Pay with M-PESA</p>
-                  <p className="text-xs text-charcoal/40">Lipa na M-PESA - instant & secure</p>
+                  <p className="text-sm font-medium text-charcoal">Pay with Pesapal</p>
+                  <p className="text-xs text-charcoal/40">M-Pesa, Visa, Mastercard & more</p>
                 </div>
               </div>
               <p className="text-xs text-charcoal/40 leading-relaxed">
-                An M-PESA payment prompt will be sent to your phone. Enter your PIN to complete the payment.
+                You'll be redirected to Pesapal's secure payment page to complete your purchase. Supports M-Pesa, cards, and other methods.
               </p>
             </div>
 
             {/* Status */}
             {msg && (
               <div className={`p-4 text-sm rounded ${
-                status === "waiting" ? "bg-amber-50 text-amber-700 border border-amber-200" :
-                status === "error" ? "bg-red-50 text-red-700 border border-red-200" :
-                "bg-green-50 text-green-700 border border-green-200"
+                status === "error"
+                  ? "bg-red-50 text-red-700 border border-red-200"
+                  : "bg-green-50 text-green-700 border border-green-200"
               }`}>
-                {status === "waiting" && (
-                  <div className="flex items-center gap-3">
-                    <div className="w-5 h-5 border-2 border-amber-400 border-t-transparent rounded-full animate-spin flex-shrink-0" />
-                    <span>{msg}</span>
-                  </div>
-                )}
-                {status !== "waiting" && msg}
+                {msg}
               </div>
             )}
 
             <button
               type="submit"
-              disabled={status === "sending" || status === "waiting"}
+              disabled={status === "sending"}
               className={`btn-gold w-full mt-4 flex items-center justify-center gap-2 ${
-                (status === "sending" || status === "waiting") ? "opacity-60 cursor-not-allowed" : ""
+                status === "sending" ? "opacity-60 cursor-not-allowed" : ""
               }`}
             >
               {status === "sending" && (
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
               )}
-              {status === "sending" ? "Sending Prompt..." :
-               status === "waiting" ? "Waiting for Payment..." :
-               `Pay KSh ${cartTotal.toLocaleString()} with M-PESA`}
+              {status === "sending" ? "Preparing Payment..." : `Pay KSh ${cartTotal.toLocaleString()}`}
             </button>
           </form>
 

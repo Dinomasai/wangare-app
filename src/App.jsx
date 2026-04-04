@@ -15,6 +15,7 @@ import AdminProducts from "./pages/AdminProducts";
 import AdminReels from "./pages/AdminReels";
 import AdminProductForm from "./pages/AdminProductForm";
 import AdminOrders from "./pages/AdminOrders";
+import PaymentStatus from "./pages/PaymentStatus";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -50,6 +51,7 @@ export default function App() {
         <Route path="/product/:id" element={<CustomerLayout><ProductDetails /></CustomerLayout>} />
         <Route path="/cart" element={<CustomerLayout><Cart /></CustomerLayout>} />
         <Route path="/checkout" element={<CustomerLayout><Checkout /></CustomerLayout>} />
+        <Route path="/payment/status" element={<CustomerLayout><PaymentStatus /></CustomerLayout>} />
         <Route path="/reels" element={<CustomerLayout><Reels /></CustomerLayout>} />
 
         {/* Admin routes */}
