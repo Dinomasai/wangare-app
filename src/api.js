@@ -147,21 +147,17 @@ export async function deleteOrder(id) {
   return res.json();
 }
 
-// M-PESA
-export async function initiateMpesa(phone, amount, orderId) {
-  const res = await fetch(`${API}/mpesa/stkpush`, {
+// Pesapal
+export async function initiatePayment(paymentDetails) {
+  const res = await fetch(`${API}/payments/initiate`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ phone, amount, orderId }),
+    body: JSON.stringify(paymentDetails),
   });
   return res.json();
 }
 
-export async function queryMpesaStatus(checkoutRequestId) {
-  const res = await fetch(`${API}/mpesa/query`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ checkoutRequestId }),
-  });
+export async function getPaymentStatus(orderTrackingId) {
+  const res = await fetch(`${API}/payments/status/${orderTrackingId}`);
   return res.json();
 }
