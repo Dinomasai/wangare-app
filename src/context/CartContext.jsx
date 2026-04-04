@@ -5,16 +5,16 @@ const CartContext = createContext();
 export function CartProvider({ children }) {
   const [items, setItems] = useState([]);
 
-  const addToCart = useCallback((product, color) => {
+  const addToCart = useCallback((product, color, size) => {
     setItems((prev) => {
-      const cartKey = `${product.id}-${color}`;
+      const cartKey = `${product.id}-${color || ""}-${size || ""}`;
       const existing = prev.find((item) => item.cartKey === cartKey);
       if (existing) {
         return prev.map((item) =>
           item.cartKey === cartKey ? { ...item, qty: item.qty + 1 } : item
         );
       }
-      return [...prev, { ...product, color, cartKey, qty: 1 }];
+      return [...prev, { ...product, color, size, cartKey, qty: 1 }];
     });
   }, []);
 
