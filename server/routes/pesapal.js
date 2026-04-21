@@ -65,9 +65,14 @@ router.post("/initiate", async (req, res) => {
   try {
     const callbackUrl = process.env.PESAPAL_CALLBACK_URL;
     const ipnUrl = process.env.PESAPAL_IPN_URL;
+    const consumerKey = process.env.PESAPAL_CONSUMER_KEY;
+    const consumerSecret = process.env.PESAPAL_CONSUMER_SECRET;
 
-    if (!callbackUrl || !ipnUrl) {
-      return res.status(500).json({ success: false, error: "Payment service is not configured" });
+    if (!callbackUrl || !ipnUrl || !consumerKey || !consumerSecret) {
+      return res.status(503).json({
+        success: false,
+        error: "Payment service is not configured. Set PESAPAL_CONSUMER_KEY, PESAPAL_CONSUMER_SECRET, PESAPAL_CALLBACK_URL, PESAPAL_IPN_URL in .env",
+      });
     }
 
     // Resolve IPN notification_id (register once, reuse)

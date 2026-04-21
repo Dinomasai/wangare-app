@@ -5,17 +5,24 @@ function authHeaders() {
   return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
+async function safeJson(promise, fallback) {
+  try {
+    const res = await promise;
+    if (!res.ok) return fallback;
+    return await res.json();
+  } catch {
+    return fallback;
+  }
+}
+
 // Products
 export async function fetchProducts(category) {
   const url = category && category !== "all" ? `${API}/products?category=${category}` : `${API}/products`;
-  const res = await fetch(url);
-  return res.json();
+  return safeJson(fetch(url), []);
 }
 
 export async function fetchProduct(id) {
-  const res = await fetch(`${API}/products/${id}`);
-  if (!res.ok) return null;
-  return res.json();
+  return safeJson(fetch(`${API}/products/${id}`), null);
 }
 
 export async function createProduct(formData) {
@@ -55,8 +62,7 @@ export async function deleteProductImage(id, imagePath) {
 
 // Reels
 export async function fetchReels() {
-  const res = await fetch(`${API}/reels`);
-  return res.json();
+  return safeJson(fetch(`${API}/reels`), []);
 }
 
 export async function createReel(formData) {
@@ -97,10 +103,14 @@ export async function adminLogin(username, password) {
 }
 
 export async function verifyAdmin() {
-  const res = await fetch(`${API}/admin/verify`, {
-    headers: { ...authHeaders(), "Content-Type": "application/json" },
-  });
-  return res.ok;
+  try {
+    const res = await fetch(`${API}/admin/verify`, {
+      headers: { ...authHeaders(), "Content-Type": "application/json" },
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
 }
 
 export async function changePassword(currentPassword, newPassword) {
@@ -124,10 +134,7 @@ export async function createOrder(order) {
 }
 
 export async function fetchOrders() {
-  const res = await fetch(`${API}/orders`, {
-    headers: authHeaders(),
-  });
-  return res.json();
+  return safeJson(fetch(`${API}/orders`, { headers: authHeaders() }), []);
 }
 
 export async function updateOrderStatus(id, status) {
@@ -149,15 +156,18 @@ export async function deleteOrder(id) {
 
 // Pesapal
 export async function initiatePayment(paymentDetails) {
-  const res = await fetch(`${API}/payments/initiate`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(paymentDetails),
-  });
-  return res.json();
+  try {
+    const res = await fetch(`${API}/payments/initiate`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(paymentDetails),
+    });
+    return res.json();
+  } catch {
+    return { success: false, error: "Payment service unreachable" };
+  }
 }
 
 export async function getPaymentStatus(orderTrackingId) {
-  const res = await fetch(`${API}/payments/status/${orderTrackingId}`);
-  return res.json();
+  return safeJson(fetch(`${API}/payments/status/${orderTrackingId}`), { success: false });
 }

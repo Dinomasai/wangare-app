@@ -127,8 +127,11 @@ router.delete("/:id", verifyToken, (req, res) => {
 
   // Delete associated images
   product.images.forEach((img) => {
+    if (!img || !img.startsWith("/uploads/")) return;
     const imgPath = path.join(__dirname, "..", img);
-    if (fs.existsSync(imgPath)) fs.unlinkSync(imgPath);
+    try {
+      if (fs.existsSync(imgPath) && fs.statSync(imgPath).isFile()) fs.unlinkSync(imgPath);
+    } catch { /* ignore */ }
   });
 
   products = products.filter((p) => p.id !== Number(req.params.id));
@@ -143,10 +146,15 @@ router.delete("/:id/image", verifyToken, (req, res) => {
   if (idx === -1) return res.status(404).json({ error: "Product not found" });
 
   const { imagePath } = req.body;
+  if (!imagePath || !imagePath.startsWith("/uploads/")) {
+    return res.status(400).json({ error: "Invalid image path" });
+  }
   products[idx].images = products[idx].images.filter((img) => img !== imagePath);
 
   const imgFile = path.join(__dirname, "..", imagePath);
-  if (fs.existsSync(imgFile)) fs.unlinkSync(imgFile);
+  try {
+    if (fs.existsSync(imgFile) && fs.statSync(imgFile).isFile()) fs.unlinkSync(imgFile);
+  } catch { /* ignore */ }
 
   writeProducts(products);
   res.json(products[idx]);

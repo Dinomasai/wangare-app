@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import SafeImg from "../components/SafeImg";
 
 export default function Cart() {
   const { items, updateQty, removeFromCart, cartTotal } = useCart();
@@ -38,7 +39,7 @@ export default function Cart() {
               className="flex gap-5 bg-white/50 border border-beige/30 p-4 md:p-6 animate-fade-in"
             >
               <Link to={`/product/${item.id}`} className="flex-shrink-0 w-24 h-28 md:w-32 md:h-36 overflow-hidden bg-cream-dark">
-                <img src={item.images[0]} alt={item.name} className="w-full h-full object-cover" />
+                <SafeImg src={item.images?.[0]} alt={item.name} className="w-full h-full object-cover" />
               </Link>
 
               <div className="flex-1 flex flex-col justify-between">

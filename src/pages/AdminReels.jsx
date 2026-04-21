@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAdmin } from "../context/AdminContext";
 import { fetchReels, fetchProducts, createReel, updateReel, deleteReel } from "../api";
+import SafeImg from "../components/SafeImg";
 
 export default function AdminReels() {
   const { isAdmin, loading: authLoading } = useAdmin();
@@ -215,7 +216,7 @@ export default function AdminReels() {
                   {reel.mediaType === "video" ? (
                     <video src={reel.media} className="w-full h-full object-cover" muted />
                   ) : (
-                    <img src={reel.media} alt="" className="w-full h-full object-cover" />
+                    <SafeImg src={reel.media} alt="" className="w-full h-full object-cover" />
                   )}
                   {reel.tag && (
                     <span className="absolute top-3 left-3 bg-black/60 backdrop-blur-sm text-white text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-full">

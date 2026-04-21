@@ -3,6 +3,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import { fetchProduct, fetchProducts } from "../api";
 import { useCart } from "../context/CartContext";
 import ProductCard from "../components/ProductCard";
+import SafeImg from "../components/SafeImg";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -78,7 +79,7 @@ export default function ProductDetails() {
           {/* Images */}
           <div className="space-y-4 animate-fade-in">
             <div className="relative overflow-hidden bg-cream-dark aspect-[3/4]">
-              <img src={product.images[activeImg]} alt={product.name} className="w-full h-full object-cover transition-all duration-500" />
+              <SafeImg src={product.images?.[activeImg]} alt={product.name} loading="eager" className="w-full h-full object-cover transition-all duration-500" />
             </div>
             {product.images.length > 1 && (
               <div className="flex gap-3 overflow-x-auto no-scrollbar">
@@ -90,7 +91,7 @@ export default function ProductDetails() {
                       i === activeImg ? "border-gold" : "border-transparent hover:border-beige"
                     }`}
                   >
-                    <img src={img} alt="" className="w-full h-full object-cover" />
+                    <SafeImg src={img} alt="" className="w-full h-full object-cover" />
                   </button>
                 ))}
               </div>

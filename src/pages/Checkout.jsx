@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { createOrder, initiatePayment } from "../api";
+import SafeImg from "../components/SafeImg";
 
 const OWNER_PHONE = "254747622490";
 
@@ -88,9 +89,14 @@ export default function Checkout() {
         customerPhone: form.phone || "",
       });
 
+      // If Pesapal isn't configured or fails, fall back to WhatsApp checkout
+      // (matches the original "Buy Now → WhatsApp" flow from the spec).
       if (!payment?.success || !payment?.data?.redirectUrl) {
-        setStatus("error");
-        setMsg(payment?.error || "Payment service unavailable. Please try again.");
+        const ownerMsg = buildOwnerMessage(order.id);
+        window.open(`https://wa.me/${OWNER_PHONE}?text=${ownerMsg}`, "_blank");
+        clearCart();
+        setStatus("success");
+        setMsg(`Order #${order.id} sent via WhatsApp. We'll confirm your order shortly.`);
         return;
       }
 
@@ -104,7 +110,7 @@ export default function Checkout() {
       window.location.href = payment.data.redirectUrl;
     } catch {
       setStatus("error");
-      setMsg("Payment service is temporarily unavailable. Please try again in a moment.");
+      setMsg("Could not place your order. Please try again in a moment.");
     }
   };
 
@@ -214,7 +220,7 @@ export default function Checkout() {
                 {items.map((item) => (
                   <div key={item.cartKey} className="flex gap-3">
                     <div className="w-14 h-16 flex-shrink-0 bg-cream-dark overflow-hidden">
-                      <img src={item.images[0]} alt={item.name} className="w-full h-full object-cover" />
+                      <SafeImg src={item.images?.[0]} alt={item.name} className="w-full h-full object-cover" />
                     </div>
                     <div className="flex-1 flex justify-between">
                       <div>

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAdmin } from "../context/AdminContext";
 import { fetchProducts, deleteProduct } from "../api";
+import SafeImg from "../components/SafeImg";
 
 export default function AdminProducts() {
   const { isAdmin, loading: authLoading } = useAdmin();
@@ -118,7 +119,7 @@ export default function AdminProducts() {
             {/* Thumb */}
             <div className="w-12 h-12 rounded-xl bg-[#F5F5F7] overflow-hidden flex-shrink-0">
               {product.images?.[0] ? (
-                <img src={product.images[0]} alt="" className="w-full h-full object-cover" />
+                <SafeImg src={product.images[0]} alt="" className="w-full h-full object-cover" />
               ) : (
                 <div className="w-full h-full flex items-center justify-center text-[10px] text-[#1C1C1E]/20">No img</div>
               )}

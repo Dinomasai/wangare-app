@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { fetchProducts } from "../api";
 import ProductCard from "../components/ProductCard";
+import heroFallback from "../assets/hero.png";
 
 /* ── Intersection Observer hook ── */
 function useInView(threshold = 0.15) {
@@ -53,16 +54,14 @@ export default function Home() {
 
   const featured = products.filter((p) => p.featured).slice(0, 8);
   const newArrivals = products.filter((p) => p.newArrival).slice(0, 10);
-  const heroImg = products[0]?.images?.[0] || "";
-  const heroImg2 = products[2]?.images?.[0] || "";
+  const heroImg = products[0]?.images?.[0] || heroFallback;
+  const heroImg2 = products[2]?.images?.[0] || heroFallback;
 
   return (
     <div>
       {/* ════════════ HERO ════════════ */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
-        {heroImg && (
-          <img src={heroImg} alt="Wangaré Luxe" className="absolute inset-0 w-full h-full object-cover animate-slow-zoom" />
-        )}
+        <img src={heroImg} alt="Wangaré Luxe" className="absolute inset-0 w-full h-full object-cover animate-slow-zoom" />
         <div className="absolute inset-0 bg-gradient-to-b from-charcoal/40 via-charcoal/50 to-charcoal/70" />
 
         <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
@@ -155,9 +154,7 @@ export default function Home() {
 
       {/* ════════════ PARALLAX QUOTE ════════════ */}
       <section className="relative py-32 md:py-44 overflow-hidden">
-        {heroImg2 && (
-          <img src={heroImg2} alt="Luxury" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center 30%" }} />
-        )}
+        <img src={heroImg2} alt="Luxury" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: "center 30%" }} />
         <div className="absolute inset-0 bg-charcoal/70 backdrop-blur-[2px]" />
         <div className="relative z-10 max-w-3xl mx-auto text-center px-6">
           <svg className="w-10 h-10 text-gold mx-auto mb-8 animate-float" fill="currentColor" viewBox="0 0 24 24">

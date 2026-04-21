@@ -74,8 +74,12 @@ router.put("/:id", verifyToken, upload.single("media"), (req, res) => {
 
   if (req.file) {
     // Delete old media
-    const oldPath = path.join(__dirname, "..", reels[idx].media);
-    if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
+    if (reels[idx].media && reels[idx].media.startsWith("/uploads/")) {
+      const oldPath = path.join(__dirname, "..", reels[idx].media);
+      try {
+        if (fs.existsSync(oldPath) && fs.statSync(oldPath).isFile()) fs.unlinkSync(oldPath);
+      } catch { /* ignore */ }
+    }
     reels[idx].media = `/uploads/reels/${req.file.filename}`;
     reels[idx].mediaType = req.file.mimetype.startsWith("video") ? "video" : "image";
   }
@@ -94,8 +98,12 @@ router.delete("/:id", verifyToken, (req, res) => {
   const reel = reels.find((r) => r.id === Number(req.params.id));
   if (!reel) return res.status(404).json({ error: "Reel not found" });
 
-  const mediaPath = path.join(__dirname, "..", reel.media);
-  if (fs.existsSync(mediaPath)) fs.unlinkSync(mediaPath);
+  if (reel.media && reel.media.startsWith("/uploads/")) {
+    const mediaPath = path.join(__dirname, "..", reel.media);
+    try {
+      if (fs.existsSync(mediaPath) && fs.statSync(mediaPath).isFile()) fs.unlinkSync(mediaPath);
+    } catch { /* ignore */ }
+  }
 
   reels = reels.filter((r) => r.id !== Number(req.params.id));
   writeReels(reels);
