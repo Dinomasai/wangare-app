@@ -1,16 +1,41 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAdmin } from "../context/AdminContext";
 import { fetchOrders, updateOrderStatus, deleteOrder } from "../api";
 
+const POLL_MS = 30_000;
+
+function playPaymentChime() {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const now = ctx.currentTime;
+    [
+      { freq: 880, start: 0,    dur: 0.18 },
+      { freq: 1320, start: 0.18, dur: 0.28 },
+    ].forEach(({ freq, start, dur }) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.value = freq;
+      gain.gain.setValueAtTime(0, now + start);
+      gain.gain.linearRampToValueAtTime(0.18, now + start + 0.02);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + start + dur);
+      osc.connect(gain).connect(ctx.destination);
+      osc.start(now + start);
+      osc.stop(now + start + dur);
+    });
+  } catch { /* ignore */ }
+}
+
 const STATUS_COLORS = {
   pending: "bg-amber-50 text-amber-700",
+  paid: "bg-green-50 text-green-700",
   confirmed: "bg-blue-50 text-blue-700",
-  delivered: "bg-green-50 text-green-700",
+  delivered: "bg-emerald-50 text-emerald-700",
   cancelled: "bg-red-50 text-red-600",
 };
 
-const STATUS_OPTIONS = ["pending", "confirmed", "delivered", "cancelled"];
+const STATUS_OPTIONS = ["pending", "paid", "confirmed", "delivered", "cancelled"];
 
 export default function AdminOrders() {
   const { isAdmin, loading: authLoading } = useAdmin();
@@ -19,17 +44,70 @@ export default function AdminOrders() {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState("all");
   const [expanded, setExpanded] = useState(null);
+  const [newPaid, setNewPaid] = useState([]); // orders awaiting acknowledgement
+
+  const seenPaidIdsRef = useRef(null); // Set<orderId> already shown to admin
+  const originalTitleRef = useRef(typeof document !== "undefined" ? document.title : "");
 
   useEffect(() => {
     if (!authLoading && !isAdmin) navigate("/admin");
   }, [isAdmin, authLoading, navigate]);
 
   useEffect(() => {
-    fetchOrders().then((data) => {
-      setOrders(data);
-      setLoading(false);
-    });
+    let cancelled = false;
+    let timer;
+
+    async function tick(isFirstLoad) {
+      const data = await fetchOrders();
+      if (cancelled) return;
+
+      const paidIds = new Set(data.filter((o) => o.status === "paid").map((o) => o.id));
+
+      if (isFirstLoad) {
+        seenPaidIdsRef.current = paidIds;
+        setOrders(data);
+        setLoading(false);
+        if (typeof Notification !== "undefined" && Notification.permission === "default") {
+          Notification.requestPermission().catch(() => {});
+        }
+      } else {
+        const seen = seenPaidIdsRef.current || new Set();
+        const fresh = data.filter((o) => o.status === "paid" && !seen.has(o.id));
+        if (fresh.length > 0) {
+          fresh.forEach((o) => seen.add(o.id));
+          seenPaidIdsRef.current = seen;
+          playPaymentChime();
+          setNewPaid((prev) => [...fresh, ...prev]);
+          if (typeof Notification !== "undefined" && Notification.permission === "granted") {
+            fresh.forEach((o) => {
+              new Notification(`Payment received — Order #${String(o.id).padStart(4, "0")}`, {
+                body: `${o.customer?.name || "Customer"} • KES ${o.total?.toLocaleString()}`,
+                tag: `order-${o.id}`,
+              });
+            });
+          }
+        }
+        setOrders(data);
+      }
+
+      timer = setTimeout(() => tick(false), POLL_MS);
+    }
+
+    tick(true);
+    return () => { cancelled = true; clearTimeout(timer); };
   }, []);
+
+  // Title badge while there are unacknowledged paid orders
+  useEffect(() => {
+    if (newPaid.length > 0) {
+      document.title = `(${newPaid.length} paid) ${originalTitleRef.current || "Wangaré Luxe Admin"}`;
+    } else {
+      document.title = originalTitleRef.current || "Wangaré Luxe Admin";
+    }
+    return () => { document.title = originalTitleRef.current || "Wangaré Luxe Admin"; };
+  }, [newPaid]);
+
+  const dismissNewPaid = () => setNewPaid([]);
 
   const handleStatus = async (id, status) => {
     const updated = await updateOrderStatus(id, status);
@@ -56,6 +134,7 @@ export default function AdminOrders() {
   const counts = {
     all: orders.length,
     pending: orders.filter((o) => o.status === "pending").length,
+    paid: orders.filter((o) => o.status === "paid").length,
     confirmed: orders.filter((o) => o.status === "confirmed").length,
     delivered: orders.filter((o) => o.status === "delivered").length,
     cancelled: orders.filter((o) => o.status === "cancelled").length,
@@ -63,6 +142,37 @@ export default function AdminOrders() {
 
   return (
     <div className="max-w-6xl mx-auto">
+      {newPaid.length > 0 && (
+        <div className="mb-6 bg-green-50 border border-green-200 rounded-2xl p-4 flex items-start gap-3 animate-fade-in">
+          <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+            <svg className="w-5 h-5 text-green-700" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+              <path d="M4.5 12.75l6 6 9-13.5" />
+            </svg>
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-sm font-semibold text-green-900">
+              {newPaid.length} new payment{newPaid.length === 1 ? "" : "s"} received
+            </p>
+            <ul className="mt-1 space-y-0.5">
+              {newPaid.slice(0, 3).map((o) => (
+                <li key={o.id} className="text-xs text-green-800">
+                  #{String(o.id).padStart(4, "0")} — {o.customer?.name || "Customer"} • KES {o.total?.toLocaleString()}
+                </li>
+              ))}
+              {newPaid.length > 3 && (
+                <li className="text-xs text-green-700/70">+{newPaid.length - 3} more</li>
+              )}
+            </ul>
+          </div>
+          <button
+            onClick={dismissNewPaid}
+            className="text-xs text-green-800 hover:text-green-900 px-3 py-1.5 rounded-lg hover:bg-green-100 transition-colors flex-shrink-0"
+          >
+            Got it
+          </button>
+        </div>
+      )}
+
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-2xl font-semibold text-[#1C1C1E]">Orders</h1>

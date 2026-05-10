@@ -1,6 +1,4 @@
-import { createRequire } from "module";
-const require = createRequire(import.meta.url);
-const pesapal = require("pesapaljs-v3");
+import pesapal from "pesapaljs-v3";
 
 const CONSUMER_KEY = process.env.PESAPAL_CONSUMER_KEY;
 const CONSUMER_SECRET = process.env.PESAPAL_CONSUMER_SECRET;

@@ -4,8 +4,6 @@ import { useCart } from "../context/CartContext";
 import { createOrder, initiatePayment } from "../api";
 import SafeImg from "../components/SafeImg";
 
-const OWNER_PHONE = "254747622490";
-
 export default function Checkout() {
   const { items, cartTotal, clearCart } = useCart();
   const [form, setForm] = useState({ name: "", email: "", phone: "", location: "" });
@@ -26,23 +24,6 @@ export default function Checkout() {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  function buildOwnerMessage(orderId) {
-    const itemsList = items
-      .map((item) => `  - ${item.name}${item.color ? ` (${item.color})` : ""}${item.size ? ` Size ${item.size}` : ""} x${item.qty} = KSh ${(item.price * item.qty).toLocaleString()}`)
-      .join("\n");
-
-    return encodeURIComponent(
-      `NEW ORDER — Pesapal Payment Initiated\n\n` +
-      `Order ID: ${orderId}\n` +
-      `Customer: ${form.name}\n` +
-      `Email: ${form.email}\n` +
-      `Phone: ${form.phone}\n` +
-      `Delivery: ${form.location}\n\n` +
-      `Items:\n${itemsList}\n\n` +
-      `Total: KSh ${cartTotal.toLocaleString()}`
-    );
-  }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -54,7 +35,6 @@ export default function Checkout() {
     setMsg("");
 
     try {
-      // 1. Create order in database
       const nameParts = form.name.trim().split(" ");
       const firstName = nameParts[0];
       const lastName = nameParts.slice(1).join(" ") || firstName;
@@ -77,7 +57,6 @@ export default function Checkout() {
         return;
       }
 
-      // 2. Initiate Pesapal payment
       const payment = await initiatePayment({
         orderId: String(order.id),
         amount: cartTotal,
@@ -89,24 +68,13 @@ export default function Checkout() {
         customerPhone: form.phone || "",
       });
 
-      // If Pesapal isn't configured or fails, fall back to WhatsApp checkout
-      // (matches the original "Buy Now → WhatsApp" flow from the spec).
       if (!payment?.success || !payment?.data?.redirectUrl) {
-        const ownerMsg = buildOwnerMessage(order.id);
-        window.open(`https://wa.me/${OWNER_PHONE}?text=${ownerMsg}`, "_blank");
-        clearCart();
-        setStatus("success");
-        setMsg(`Order #${order.id} sent via WhatsApp. We'll confirm your order shortly.`);
+        setStatus("error");
+        setMsg("Payment service is temporarily unavailable. Please try again in a moment.");
         return;
       }
 
-      // 3. Notify owner via WhatsApp
-      const ownerMsg = buildOwnerMessage(order.id);
-      window.open(`https://wa.me/${OWNER_PHONE}?text=${ownerMsg}`, "_blank");
-
       clearCart();
-
-      // 4. Redirect to Pesapal payment page
       window.location.href = payment.data.redirectUrl;
     } catch {
       setStatus("error");

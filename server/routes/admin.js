@@ -1,30 +1,22 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import { readJson, writeJson } from "../storage.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const ADMIN_FILE = path.join(__dirname, "..", "data", "admin.json");
 const JWT_SECRET = process.env.JWT_SECRET || "wangare-luxe-secret-key-change-this";
+const ADMIN_KEY = "admin";
 
 const router = express.Router();
 
-// Initialize admin account if not exists
-function initAdmin() {
-  if (!fs.existsSync(ADMIN_FILE)) {
-    const hash = bcrypt.hashSync("admin123", 10);
-    fs.writeFileSync(
-      ADMIN_FILE,
-      JSON.stringify({ username: "admin", password: hash }, null, 2)
-    );
+async function getAdmin() {
+  let admin = await readJson(ADMIN_KEY, null);
+  if (!admin) {
+    admin = { username: "admin", password: bcrypt.hashSync("admin123", 10) };
+    await writeJson(ADMIN_KEY, admin);
   }
+  return admin;
 }
-initAdmin();
 
-// Middleware to verify JWT
 export function verifyToken(req, res, next) {
   const authHeader = req.headers.authorization;
   if (!authHeader) return res.status(401).json({ error: "No token provided" });
@@ -39,10 +31,9 @@ export function verifyToken(req, res, next) {
   }
 }
 
-// POST login
-router.post("/login", (req, res) => {
+router.post("/login", async (req, res) => {
   const { username, password } = req.body;
-  const admin = JSON.parse(fs.readFileSync(ADMIN_FILE, "utf-8"));
+  const admin = await getAdmin();
 
   if (username !== admin.username || !bcrypt.compareSync(password, admin.password)) {
     return res.status(401).json({ error: "Invalid credentials" });
@@ -52,21 +43,19 @@ router.post("/login", (req, res) => {
   res.json({ token, username });
 });
 
-// PUT change password (admin only)
-router.put("/password", verifyToken, (req, res) => {
+router.put("/password", verifyToken, async (req, res) => {
   const { currentPassword, newPassword } = req.body;
-  const admin = JSON.parse(fs.readFileSync(ADMIN_FILE, "utf-8"));
+  const admin = await getAdmin();
 
   if (!bcrypt.compareSync(currentPassword, admin.password)) {
     return res.status(401).json({ error: "Current password is incorrect" });
   }
 
   admin.password = bcrypt.hashSync(newPassword, 10);
-  fs.writeFileSync(ADMIN_FILE, JSON.stringify(admin, null, 2));
+  await writeJson(ADMIN_KEY, admin);
   res.json({ message: "Password updated" });
 });
 
-// GET verify token
 router.get("/verify", verifyToken, (req, res) => {
   res.json({ valid: true, username: req.admin.username });
 });

@@ -1,31 +1,14 @@
 import express from "express";
-import fs from "fs";
 import path from "path";
-import { fileURLToPath } from "url";
 import multer from "multer";
 import { verifyToken } from "./admin.js";
+import { readJson, writeJson, putUpload, deleteUpload, uploadKeyFromPath } from "../storage.js";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const DATA_FILE = path.join(__dirname, "..", "data", "products.json");
-
+const PRODUCTS_KEY = "products";
 const router = express.Router();
 
-// Image upload config
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const dir = path.join(__dirname, "..", "uploads");
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-    cb(null, dir);
-  },
-  filename: (req, file, cb) => {
-    const unique = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    const ext = path.extname(file.originalname);
-    cb(null, `product-${unique}${ext}`);
-  },
-});
 const upload = multer({
-  storage,
+  storage: multer.memoryStorage(),
   limits: { fileSize: 10 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     const allowed = /jpeg|jpg|png|webp/;
@@ -35,18 +18,21 @@ const upload = multer({
   },
 });
 
-function readProducts() {
-  if (!fs.existsSync(DATA_FILE)) return [];
-  return JSON.parse(fs.readFileSync(DATA_FILE, "utf-8"));
+async function persistFiles(files, prefix) {
+  if (!files || files.length === 0) return [];
+  const urls = [];
+  for (const file of files) {
+    const unique = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    const ext = path.extname(file.originalname);
+    const key = `${prefix}-${unique}${ext}`;
+    await putUpload(key, file.buffer, file.mimetype);
+    urls.push(`/uploads/${key}`);
+  }
+  return urls;
 }
 
-function writeProducts(products) {
-  fs.writeFileSync(DATA_FILE, JSON.stringify(products, null, 2));
-}
-
-// GET all products (public)
-router.get("/", (req, res) => {
-  const products = readProducts();
+router.get("/", async (req, res) => {
+  const products = await readJson(PRODUCTS_KEY, []);
   const { category } = req.query;
   if (category && category !== "all") {
     return res.json(products.filter((p) => p.category === category));
@@ -54,21 +40,19 @@ router.get("/", (req, res) => {
   res.json(products);
 });
 
-// GET single product (public)
-router.get("/:id", (req, res) => {
-  const products = readProducts();
+router.get("/:id", async (req, res) => {
+  const products = await readJson(PRODUCTS_KEY, []);
   const product = products.find((p) => p.id === Number(req.params.id));
   if (!product) return res.status(404).json({ error: "Product not found" });
   res.json(product);
 });
 
-// POST create product (admin only)
-router.post("/", verifyToken, upload.array("images", 8), (req, res) => {
-  const products = readProducts();
+router.post("/", verifyToken, upload.array("images", 8), async (req, res) => {
+  const products = await readJson(PRODUCTS_KEY, []);
   const { name, price, category, description, colors, sizes, featured, newArrival } = req.body;
 
   const newId = products.length > 0 ? Math.max(...products.map((p) => p.id)) + 1 : 1;
-  const images = req.files ? req.files.map((f) => `/uploads/${f.filename}`) : [];
+  const images = await persistFiles(req.files, "product");
 
   const product = {
     id: newId,
@@ -84,13 +68,12 @@ router.post("/", verifyToken, upload.array("images", 8), (req, res) => {
   };
 
   products.push(product);
-  writeProducts(products);
+  await writeJson(PRODUCTS_KEY, products);
   res.status(201).json(product);
 });
 
-// PUT update product (admin only)
-router.put("/:id", verifyToken, upload.array("images", 8), (req, res) => {
-  const products = readProducts();
+router.put("/:id", verifyToken, upload.array("images", 8), async (req, res) => {
+  const products = await readJson(PRODUCTS_KEY, []);
   const idx = products.findIndex((p) => p.id === Number(req.params.id));
   if (idx === -1) return res.status(404).json({ error: "Product not found" });
 
@@ -98,7 +81,7 @@ router.put("/:id", verifyToken, upload.array("images", 8), (req, res) => {
 
   let images = existingImages ? JSON.parse(existingImages) : products[idx].images;
   if (req.files && req.files.length > 0) {
-    const newImages = req.files.map((f) => `/uploads/${f.filename}`);
+    const newImages = await persistFiles(req.files, "product");
     images = [...images, ...newImages];
   }
 
@@ -115,48 +98,37 @@ router.put("/:id", verifyToken, upload.array("images", 8), (req, res) => {
     newArrival: newArrival !== undefined ? newArrival === "true" : products[idx].newArrival,
   };
 
-  writeProducts(products);
+  await writeJson(PRODUCTS_KEY, products);
   res.json(products[idx]);
 });
 
-// DELETE product (admin only)
-router.delete("/:id", verifyToken, (req, res) => {
-  let products = readProducts();
+router.delete("/:id", verifyToken, async (req, res) => {
+  let products = await readJson(PRODUCTS_KEY, []);
   const product = products.find((p) => p.id === Number(req.params.id));
   if (!product) return res.status(404).json({ error: "Product not found" });
 
-  // Delete associated images
-  product.images.forEach((img) => {
-    if (!img || !img.startsWith("/uploads/")) return;
-    const imgPath = path.join(__dirname, "..", img);
-    try {
-      if (fs.existsSync(imgPath) && fs.statSync(imgPath).isFile()) fs.unlinkSync(imgPath);
-    } catch { /* ignore */ }
-  });
+  for (const img of product.images || []) {
+    const key = uploadKeyFromPath(img);
+    if (key) await deleteUpload(key);
+  }
 
   products = products.filter((p) => p.id !== Number(req.params.id));
-  writeProducts(products);
+  await writeJson(PRODUCTS_KEY, products);
   res.json({ message: "Product deleted" });
 });
 
-// DELETE single image from product (admin only)
-router.delete("/:id/image", verifyToken, (req, res) => {
-  const products = readProducts();
+router.delete("/:id/image", verifyToken, async (req, res) => {
+  const products = await readJson(PRODUCTS_KEY, []);
   const idx = products.findIndex((p) => p.id === Number(req.params.id));
   if (idx === -1) return res.status(404).json({ error: "Product not found" });
 
   const { imagePath } = req.body;
-  if (!imagePath || !imagePath.startsWith("/uploads/")) {
-    return res.status(400).json({ error: "Invalid image path" });
-  }
+  const key = uploadKeyFromPath(imagePath);
+  if (!key) return res.status(400).json({ error: "Invalid image path" });
+
   products[idx].images = products[idx].images.filter((img) => img !== imagePath);
-
-  const imgFile = path.join(__dirname, "..", imagePath);
-  try {
-    if (fs.existsSync(imgFile) && fs.statSync(imgFile).isFile()) fs.unlinkSync(imgFile);
-  } catch { /* ignore */ }
-
-  writeProducts(products);
+  await deleteUpload(key);
+  await writeJson(PRODUCTS_KEY, products);
   res.json(products[idx]);
 });
 
