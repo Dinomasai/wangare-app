@@ -122,9 +122,14 @@ router.post("/initiate", async (req, res) => {
       },
     });
   } catch (err) {
+    console.error("[pesapal initiate] error:", err?.message || err, err?.response?.data || "");
     return res.status(500).json({
       success: false,
       error: "Failed to initiate payment. Please try again.",
+      debug: process.env.PESAPAL_DEBUG === "1" ? {
+        message: String(err?.message || err),
+        data: err?.response?.data || null,
+      } : undefined,
     });
   }
 });

@@ -3,7 +3,15 @@ import { useParams } from "react-router-dom";
 import { fetchProducts } from "../api";
 import ProductCard from "../components/ProductCard";
 
-const categories = ["all", "bags", "clothes", "jewelry"];
+const CATEGORY_LABELS = {
+  all: "All",
+  ankara: "Ankara Outfits",
+  bags: "Bags",
+  jewelry: "Jewelry",
+  watches: "Watches",
+  sunglasses: "Sunglasses",
+};
+const categories = ["all", "ankara", "bags", "jewelry", "watches", "sunglasses"];
 
 export default function Shop() {
   const { category: urlCategory } = useParams();
@@ -39,7 +47,7 @@ export default function Shop() {
           <p className="text-gold text-xs tracking-[0.4em] uppercase mb-3">Our Collection</p>
           <h1 className="font-serif text-4xl md:text-5xl text-charcoal">Shop</h1>
           <p className="mt-3 text-sm text-charcoal/50 tracking-wider max-w-md mx-auto">
-            Explore our curated selection of luxury bags, clothes & jewelry
+            Explore our curated selection of bags, jewelry, watches, sunglasses & Ankara outfits
           </p>
         </div>
 
@@ -55,7 +63,7 @@ export default function Shop() {
                     : "border border-charcoal/20 text-charcoal/60 hover:border-charcoal"
                 }`}
               >
-                {cat}
+                {CATEGORY_LABELS[cat] || cat}
               </button>
             ))}
           </div>

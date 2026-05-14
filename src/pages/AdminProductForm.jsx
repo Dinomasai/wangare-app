@@ -3,7 +3,13 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import { useAdmin } from "../context/AdminContext";
 import { fetchProduct, createProduct, updateProduct, deleteProductImage } from "../api";
 
-const categoryOptions = ["bags", "clothes", "jewelry"];
+const categoryOptions = [
+  { value: "ankara", label: "Ankara Outfits" },
+  { value: "bags", label: "Bags" },
+  { value: "jewelry", label: "Jewelry" },
+  { value: "watches", label: "Watches" },
+  { value: "sunglasses", label: "Sunglasses" },
+];
 
 export default function AdminProductForm() {
   const { id } = useParams();
@@ -133,7 +139,7 @@ export default function AdminProductForm() {
                 className="w-full bg-[#F5F5F7] rounded-xl px-4 py-3 text-sm text-[#1C1C1E] focus:outline-none focus:ring-2 focus:ring-gold/30 cursor-pointer"
               >
                 {categoryOptions.map((cat) => (
-                  <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
+                  <option key={cat.value} value={cat.value}>{cat.label}</option>
                 ))}
               </select>
             </div>

@@ -1,116 +1,146 @@
-import pesapal from "pesapaljs-v3";
+// Direct Pesapal v3 REST API client. We don't use pesapaljs-v3 because its
+// internal/core.js has bugs: registerIPNurl sends `url: ipn_notification_type`
+// (so the IPN URL gets clobbered with the notification type), and get_ipn_list
+// requires params it doesn't use. Talking to the API ourselves is shorter,
+// debuggable, and the surface is small (5 endpoints).
 
-const CONSUMER_KEY = process.env.PESAPAL_CONSUMER_KEY;
-const CONSUMER_SECRET = process.env.PESAPAL_CONSUMER_SECRET;
 const IS_SANDBOX = (process.env.PESAPAL_ENV || "sandbox") !== "live";
+const BASE_URL = IS_SANDBOX
+  ? "https://cybqa.pesapal.com/pesapalv3"
+  : "https://pay.pesapal.com/v3";
 
-let pesapalInstance = null;
+let cachedToken = null;
 let tokenExpiresAt = 0;
 
-/**
- * Initialize Pesapal SDK and authenticate.
- * Tokens expire in ~5 minutes — re-authenticates automatically.
- */
-async function initializePesapal() {
-  if (!CONSUMER_KEY || !CONSUMER_SECRET) {
-    throw new Error("PESAPAL_CONSUMER_KEY and PESAPAL_CONSUMER_SECRET must be set");
+class PesapalError extends Error {
+  constructor(message, { status, body } = {}) {
+    super(message);
+    this.name = "PesapalError";
+    this.status = status;
+    this.response = { data: body };
+  }
+}
+
+async function authenticate() {
+  const key = process.env.PESAPAL_CONSUMER_KEY;
+  const secret = process.env.PESAPAL_CONSUMER_SECRET;
+  if (!key || !secret) {
+    throw new PesapalError("PESAPAL_CONSUMER_KEY and PESAPAL_CONSUMER_SECRET must be set");
   }
 
-  if (!pesapalInstance) {
-    pesapalInstance = pesapal.init({
-      key: CONSUMER_KEY,
-      secret: CONSUMER_SECRET,
-      debug: IS_SANDBOX,
+  const res = await fetch(`${BASE_URL}/api/Auth/RequestToken`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({ consumer_key: key, consumer_secret: secret }),
+  });
+  const body = await safeJson(res);
+  if (!res.ok || !body?.token) {
+    throw new PesapalError(`Pesapal auth failed (${res.status})`, { status: res.status, body });
+  }
+  cachedToken = body.token;
+  // Pesapal tokens are valid for 5 minutes — refresh 30s before expiry.
+  tokenExpiresAt = Date.now() + (5 * 60 - 30) * 1000;
+  return cachedToken;
+}
+
+async function getValidToken() {
+  if (!cachedToken || Date.now() >= tokenExpiresAt) {
+    await authenticate();
+  }
+  return cachedToken;
+}
+
+async function call(path, { method = "GET", body, query } = {}) {
+  const token = await getValidToken();
+  const url = new URL(`${BASE_URL}${path}`);
+  if (query) {
+    for (const [k, v] of Object.entries(query)) {
+      if (v !== undefined && v !== null) url.searchParams.set(k, String(v));
+    }
+  }
+  const res = await fetch(url.toString(), {
+    method,
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: body ? JSON.stringify(body) : undefined,
+  });
+  const parsed = await safeJson(res);
+  if (!res.ok) {
+    throw new PesapalError(`Pesapal ${method} ${path} failed (${res.status})`, {
+      status: res.status,
+      body: parsed,
     });
   }
-
-  // Re-authenticate if token is expired or about to expire (30s buffer)
-  if (Date.now() >= tokenExpiresAt - 30_000) {
-    await pesapalInstance.authenticate();
-    // Pesapal tokens are valid for 5 minutes
-    tokenExpiresAt = Date.now() + 5 * 60 * 1000;
+  // Pesapal sometimes returns 200 with an error envelope: { status: "500", error: {...} }
+  if (parsed && parsed.error && (parsed.status === "500" || parsed.error.code)) {
+    throw new PesapalError(parsed.error.message || `Pesapal returned error envelope`, {
+      status: 200,
+      body: parsed,
+    });
   }
-
-  return pesapalInstance;
+  return parsed;
 }
 
-/**
- * Register the IPN callback URL with Pesapal.
- * @param {string} ipnUrl - Publicly accessible URL for IPN notifications
- * @param {"GET"|"POST"} notificationType
- * @returns {Promise<{ipn_id: string}>}
- */
-async function registerIPN(ipnUrl, notificationType = "GET") {
-  const instance = await initializePesapal();
-  return instance.register_ipn_url({ url: ipnUrl, ipn_notification_type: notificationType });
+async function safeJson(res) {
+  try { return await res.json(); }
+  catch { return null; }
 }
 
-/**
- * Fetch the list of registered IPN URLs.
- * @returns {Promise<Array>}
- */
-async function getIPNList() {
-  const instance = await initializePesapal();
-  return instance.get_ipn_list({ url: "", ipn_notification_type: "" });
+export async function registerIPN(ipnUrl, notificationType = "GET") {
+  return call("/api/URLSetup/RegisterIPN", {
+    method: "POST",
+    body: { url: ipnUrl, ipn_notification_type: notificationType },
+  });
 }
 
-/**
- * Create a Pesapal payment order.
- * @param {{
- *   orderId: string,
- *   amount: number,
- *   currency: string,
- *   description: string,
- *   callbackUrl: string,
- *   notificationId: string,
- *   customerEmail: string,
- *   customerFirstName: string,
- *   customerLastName: string,
- *   customerPhone?: string,
- * }} orderDetails
- * @returns {Promise<{order_tracking_id: string, merchant_reference: string, redirect_url: string}>}
- */
-async function createPayment(orderDetails) {
-  const instance = await initializePesapal();
+export async function getIPNList() {
+  return call("/api/URLSetup/GetIpnList", { method: "GET" });
+}
 
+export async function createPayment(orderDetails) {
   const {
     orderId, amount, currency, description,
     callbackUrl, notificationId,
     customerEmail, customerFirstName, customerLastName, customerPhone,
   } = orderDetails;
 
-  return instance.submit_order({
-    id: orderId,
-    currency: currency || "KES",
-    amount,
-    description,
-    callback_url: callbackUrl,
-    notification_id: notificationId,
-    billing_address: {
-      email_address: customerEmail || "",
-      phone_number: customerPhone || "",
-      country_code: "KE",
-      first_name: customerFirstName || "",
-      middle_name: "",
-      last_name: customerLastName || "",
-      line_1: "",
-      line_2: "",
-      city: "",
-      state: "",
-      postal_code: null,
-      zip_code: null,
+  return call("/api/Transactions/SubmitOrderRequest", {
+    method: "POST",
+    body: {
+      id: orderId,
+      currency: currency || "KES",
+      amount,
+      description,
+      callback_url: callbackUrl,
+      notification_id: notificationId,
+      billing_address: {
+        email_address: customerEmail || "",
+        phone_number: customerPhone || "",
+        country_code: "KE",
+        first_name: customerFirstName || "",
+        middle_name: "",
+        last_name: customerLastName || "",
+        line_1: "",
+        line_2: "",
+        city: "",
+        state: "",
+        postal_code: null,
+        zip_code: null,
+      },
     },
   });
 }
 
-/**
- * Query the status of a Pesapal transaction.
- * @param {string} orderTrackingId
- * @returns {Promise<{payment_status_description: string, amount: number, currency: string, ...}>}
- */
-async function checkPaymentStatus(orderTrackingId) {
-  const instance = await initializePesapal();
-  return instance.get_transaction_status({ OrderTrackingId: orderTrackingId });
+export async function checkPaymentStatus(orderTrackingId) {
+  return call("/api/Transactions/GetTransactionStatus", {
+    method: "GET",
+    query: { orderTrackingId },
+  });
 }
 
-export { initializePesapal, registerIPN, getIPNList, createPayment, checkPaymentStatus };
+export async function initializePesapal() {
+  await getValidToken();
+}

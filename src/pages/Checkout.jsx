@@ -70,7 +70,9 @@ export default function Checkout() {
 
       if (!payment?.success || !payment?.data?.redirectUrl) {
         setStatus("error");
-        setMsg("Payment service is temporarily unavailable. Please try again in a moment.");
+        const detail = payment?.debug?.message || payment?.error || "unknown";
+        setMsg(`Payment service error: ${detail}`);
+        console.error("[checkout] initiate failed", payment);
         return;
       }
 

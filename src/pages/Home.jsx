@@ -39,9 +39,11 @@ function SectionIntro({ overline, title, subtitle, light = false, className = ""
 
 /* ── Category data ── */
 const CATEGORIES = [
-  { name: "Bags", slug: "bags", desc: "Curated leather bags for every occasion" },
-  { name: "Clothes", slug: "clothes", desc: "Elegant outfits styled to perfection" },
+  { name: "Bags", slug: "bags", desc: "Sculpted shapes, finished in detail" },
   { name: "Jewelry", slug: "jewelry", desc: "Statement pieces that shine" },
+  { name: "Watches", slug: "watches", desc: "Timekeeping with attitude" },
+  { name: "Sunglasses", slug: "sunglasses", desc: "Frames that finish the look" },
+  { name: "Ankara Outfits", slug: "ankara", desc: "Heritage prints, modern silhouettes" },
 ];
 
 /* ══════════════════════════════ HOME ══════════════════════════════ */

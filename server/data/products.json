@@ -1,12 +1,16 @@
 [
   {
     "id": 1,
-    "name": "Croc-Embossed Crossbody",
-    "price": 4500,
+    "name": "YSL-Style Hobo Bag",
+    "price": 2200,
     "category": "bags",
-    "images": ["/uploads/product1.jpg", "/uploads/product2.jpg", "/uploads/product3.jpg", "/uploads/product4.jpg"],
-    "description": "Elegant brown croc-embossed leather crossbody with gold hardware and detachable mini pouch. Perfect for everyday luxury.",
-    "colors": ["Brown", "Black", "Tan"],
+    "images": [
+      "/uploads/bags-01-1.jpg",
+      "/uploads/bags-01-2.jpg",
+      "/uploads/bags-01-3.jpg"
+    ],
+    "description": "Structured silhouette, refined hardware. A piece that elevates jeans-and-tee just as easily as evening wear.",
+    "colors": [],
     "sizes": [],
     "featured": true,
     "newArrival": true
@@ -14,265 +18,965 @@
   {
     "id": 2,
     "name": "Quilted Chain Shoulder Bag",
-    "price": 5200,
+    "price": 2500,
     "category": "bags",
-    "images": ["/uploads/product5.jpg", "/uploads/product6.jpg", "/uploads/product7.jpg", "/uploads/product8.jpg"],
-    "description": "Classic quilted shoulder bag with gold chain strap and turn-lock closure. Timeless sophistication for every occasion.",
-    "colors": ["Black", "Cream", "Burgundy"],
+    "images": [
+      "/uploads/bags-02-1.jpg",
+      "/uploads/bags-02-2.jpg",
+      "/uploads/bags-02-3.jpg",
+      "/uploads/bags-02-4.jpg"
+    ],
+    "description": "Structured silhouette, refined hardware. A piece that elevates jeans-and-tee just as easily as evening wear.",
+    "colors": [],
     "sizes": [],
     "featured": true,
-    "newArrival": false
+    "newArrival": true
   },
   {
     "id": 3,
-    "name": "Textured Flap Satchel",
-    "price": 3800,
+    "name": "Fur-Trim Mini Bag",
+    "price": 2700,
     "category": "bags",
-    "images": ["/uploads/product9.jpg", "/uploads/product10.jpg", "/uploads/product11.jpg", "/uploads/product12.jpg"],
-    "description": "Structured flap satchel with textured leather finish and gold-tone clasp. A refined statement piece.",
-    "colors": ["Beige", "Black", "Brown"],
+    "images": [
+      "/uploads/bags-03-1.jpg",
+      "/uploads/bags-03-2.jpg",
+      "/uploads/bags-03-3.jpg"
+    ],
+    "description": "Structured silhouette, refined hardware. A piece that elevates jeans-and-tee just as easily as evening wear.",
+    "colors": [],
     "sizes": [],
     "featured": true,
     "newArrival": true
   },
   {
     "id": 4,
-    "name": "Mini Envelope Clutch",
-    "price": 2800,
+    "name": "Croc-Embossed Crossbody",
+    "price": 3000,
     "category": "bags",
-    "images": ["/uploads/product13.jpg", "/uploads/product14.jpg", "/uploads/product15.jpg", "/uploads/product16.jpg"],
-    "description": "Sleek mini envelope clutch with magnetic closure. Compact elegance for evening outings.",
-    "colors": ["Gold", "Silver", "Black"],
+    "images": [
+      "/uploads/bags-04-1.jpg",
+      "/uploads/bags-04-2.jpg",
+      "/uploads/bags-04-3.jpg",
+      "/uploads/bags-04-4.jpg"
+    ],
+    "description": "Structured silhouette, refined hardware. A piece that elevates jeans-and-tee just as easily as evening wear.",
+    "colors": [],
     "sizes": [],
-    "featured": false,
+    "featured": true,
     "newArrival": true
   },
   {
     "id": 5,
-    "name": "Ruched Handle Tote",
-    "price": 4800,
+    "name": "Patent Leather Tote",
+    "price": 3200,
     "category": "bags",
-    "images": ["/uploads/product17.jpg", "/uploads/product18.jpg", "/uploads/product19.jpg", "/uploads/product20.jpg"],
-    "description": "Sophisticated tote with soft ruched top handle and structured body. The ultimate day-to-night companion.",
-    "colors": ["Black", "Nude", "Wine"],
+    "images": [
+      "/uploads/bags-05-1.jpg",
+      "/uploads/bags-05-2.jpg",
+      "/uploads/bags-05-3.jpg",
+      "/uploads/bags-05-4.jpg"
+    ],
+    "description": "Structured silhouette, refined hardware. A piece that elevates jeans-and-tee just as easily as evening wear.",
+    "colors": [],
     "sizes": [],
-    "featured": true,
-    "newArrival": false
+    "featured": false,
+    "newArrival": true
   },
   {
     "id": 6,
-    "name": "White Medallion Handbag",
-    "price": 5500,
+    "name": "Structured Top Handle",
+    "price": 3500,
     "category": "bags",
-    "images": ["/uploads/product21.jpg", "/uploads/product22.jpg", "/uploads/product23.jpg"],
-    "description": "Pristine white handbag with ornate gold medallion clasp and croc-embossed detailing. Pure luxury.",
-    "colors": ["White", "Cream", "Black"],
+    "images": [
+      "/uploads/bags-06-1.jpg",
+      "/uploads/bags-06-2.jpg",
+      "/uploads/bags-06-3.jpg"
+    ],
+    "description": "Structured silhouette, refined hardware. A piece that elevates jeans-and-tee just as easily as evening wear.",
+    "colors": [],
     "sizes": [],
-    "featured": true,
+    "featured": false,
     "newArrival": true
   },
   {
     "id": 7,
-    "name": "Heart Clasp Chevron Bag",
-    "price": 3500,
+    "name": "Soft Hobo Shoulder Bag",
+    "price": 3700,
     "category": "bags",
-    "images": ["/uploads/product24.jpg", "/uploads/product25.jpg", "/uploads/product26.jpg", "/uploads/product27.jpg"],
-    "description": "Romantic chevron-quilted bag with signature heart clasp and satin ruched handle. A charming piece.",
-    "colors": ["Pink", "Black", "Red"],
+    "images": [
+      "/uploads/bags-07-1.jpg",
+      "/uploads/bags-07-2.jpg",
+      "/uploads/bags-07-3.jpg",
+      "/uploads/bags-07-4.jpg"
+    ],
+    "description": "Structured silhouette, refined hardware. A piece that elevates jeans-and-tee just as easily as evening wear.",
+    "colors": [],
     "sizes": [],
     "featured": false,
-    "newArrival": true
+    "newArrival": false
   },
   {
     "id": 8,
-    "name": "Duo-Tone Structured Bag",
-    "price": 4200,
+    "name": "Chain-Strap Flap Bag",
+    "price": 4000,
     "category": "bags",
-    "images": ["/uploads/product28.jpg", "/uploads/product29.jpg", "/uploads/product30.jpg"],
-    "description": "Modern black-and-white structured bag with clean geometric lines. Bold yet refined.",
-    "colors": ["Black/White", "Brown/Cream", "Navy/White"],
+    "images": [
+      "/uploads/bags-08-1.jpg",
+      "/uploads/bags-08-2.jpg",
+      "/uploads/bags-08-3.jpg"
+    ],
+    "description": "Structured silhouette, refined hardware. A piece that elevates jeans-and-tee just as easily as evening wear.",
+    "colors": [],
     "sizes": [],
-    "featured": true,
+    "featured": false,
     "newArrival": false
   },
   {
     "id": 9,
-    "name": "Gold Buckle Crossbody",
-    "price": 3900,
+    "name": "Bucket Drawstring Bag",
+    "price": 4200,
     "category": "bags",
-    "images": ["/uploads/product31.jpg", "/uploads/product32.jpg", "/uploads/product33.jpg", "/uploads/product34.jpg"],
-    "description": "Chic crossbody with oversized gold buckle and adjustable strap. Effortless luxury on the go.",
-    "colors": ["Tan", "Black", "Olive"],
+    "images": [
+      "/uploads/bags-09-1.jpg",
+      "/uploads/bags-09-2.jpg",
+      "/uploads/bags-09-3.jpg",
+      "/uploads/bags-09-4.jpg"
+    ],
+    "description": "Structured silhouette, refined hardware. A piece that elevates jeans-and-tee just as easily as evening wear.",
+    "colors": [],
     "sizes": [],
     "featured": false,
-    "newArrival": true
+    "newArrival": false
   },
   {
     "id": 10,
-    "name": "Beige Croc Shoulder Bag",
-    "price": 4700,
+    "name": "Mini Box Crossbody",
+    "price": 4500,
     "category": "bags",
-    "images": ["/uploads/product35.jpg", "/uploads/product36.jpg", "/uploads/product37.jpg", "/uploads/product38.jpg"],
-    "description": "Luxurious beige croc-embossed shoulder bag with geometric clasp and matching coin purse.",
-    "colors": ["Beige", "Brown", "Black"],
+    "images": [
+      "/uploads/bags-10-1.jpg",
+      "/uploads/bags-10-2.jpg",
+      "/uploads/bags-10-3.jpg"
+    ],
+    "description": "Structured silhouette, refined hardware. A piece that elevates jeans-and-tee just as easily as evening wear.",
+    "colors": [],
     "sizes": [],
-    "featured": true,
+    "featured": false,
     "newArrival": false
   },
   {
     "id": 11,
-    "name": "Pearl Handle Evening Bag",
-    "price": 3200,
+    "name": "Pearl-Handle Clutch",
+    "price": 4700,
     "category": "bags",
-    "images": ["/uploads/product39.jpg", "/uploads/product40.jpg", "/uploads/product41.jpg"],
-    "description": "Exquisite evening bag with pearl-studded handle and gold chain. Perfect for special occasions.",
-    "colors": ["White", "Champagne", "Black"],
+    "images": [
+      "/uploads/bags-11-1.jpg",
+      "/uploads/bags-11-2.jpg",
+      "/uploads/bags-11-3.jpg",
+      "/uploads/bags-11-4.jpg"
+    ],
+    "description": "Structured silhouette, refined hardware. A piece that elevates jeans-and-tee just as easily as evening wear.",
+    "colors": [],
     "sizes": [],
     "featured": false,
-    "newArrival": true
+    "newArrival": false
   },
   {
     "id": 12,
-    "name": "Chain Link Flap Bag",
-    "price": 4100,
+    "name": "Saddle Bag with Tassel",
+    "price": 5000,
     "category": "bags",
-    "images": ["/uploads/product42.jpg", "/uploads/product43.jpg", "/uploads/product44.jpg", "/uploads/product45.jpg"],
-    "description": "Elegant flap bag with woven chain link strap and magnetic closure. Understated glamour.",
-    "colors": ["Black", "Gold", "Silver"],
+    "images": [
+      "/uploads/bags-12-1.jpg",
+      "/uploads/bags-12-2.jpg",
+      "/uploads/bags-12-3.jpg"
+    ],
+    "description": "Structured silhouette, refined hardware. A piece that elevates jeans-and-tee just as easily as evening wear.",
+    "colors": [],
     "sizes": [],
-    "featured": true,
+    "featured": false,
     "newArrival": false
   },
   {
     "id": 13,
-    "name": "Lace Pearl Clutch",
-    "price": 2900,
+    "name": "Woven Leather Tote",
+    "price": 5200,
     "category": "bags",
-    "images": ["/uploads/product46.jpg", "/uploads/product47.jpg", "/uploads/product48.jpg"],
-    "description": "Delicate lace overlay clutch with pearl bead handle and gold frame. A bridal favourite.",
-    "colors": ["White", "Ivory", "Blush"],
+    "images": [
+      "/uploads/bags-13-1.jpg",
+      "/uploads/bags-13-2.jpg",
+      "/uploads/bags-13-3.jpg",
+      "/uploads/bags-13-4.jpg"
+    ],
+    "description": "Structured silhouette, refined hardware. A piece that elevates jeans-and-tee just as easily as evening wear.",
+    "colors": [],
     "sizes": [],
     "featured": false,
-    "newArrival": true
-  },
-  {
-    "id": 14,
-    "name": "Silver Bow Frame Clutch",
-    "price": 3100,
-    "category": "bags",
-    "images": ["/uploads/product49.jpg", "/uploads/product50.jpg", "/uploads/product51.jpg"],
-    "description": "Glittering silver fabric clutch with crystal bow frame and detachable chain. Red carpet ready.",
-    "colors": ["Silver", "Gold", "Rose Gold"],
-    "sizes": [],
-    "featured": true,
-    "newArrival": true
-  },
-  {
-    "id": 15,
-    "name": "Blush Pink Tote Set",
-    "price": 5800,
-    "category": "bags",
-    "images": ["/uploads/product52.jpg", "/uploads/product53.jpg", "/uploads/product54.jpg"],
-    "description": "Three-piece blush pink tote set with tassel accents and gold hardware. Complete your collection.",
-    "colors": ["Blush Pink", "Cream", "Dusty Rose"],
-    "sizes": [],
-    "featured": true,
     "newArrival": false
   },
   {
-    "id": 16,
-    "name": "Marble Effect Handbag",
-    "price": 4400,
+    "id": 14,
+    "name": "Padded Puffer Bag",
+    "price": 5500,
     "category": "bags",
-    "images": ["/uploads/product55.jpg", "/uploads/product56.jpg", "/uploads/product57.jpg", "/uploads/product58.jpg"],
-    "description": "Unique marble-effect leather handbag with structured silhouette. A conversation starter.",
-    "colors": ["Grey Marble", "White Marble", "Black"],
+    "images": [
+      "/uploads/bags-14-1.jpg"
+    ],
+    "description": "Structured silhouette, refined hardware. A piece that elevates jeans-and-tee just as easily as evening wear.",
+    "colors": [],
     "sizes": [],
     "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 15,
+    "name": "Enamel Flower Ring",
+    "price": 800,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-01-1.jpg",
+      "/uploads/jewelry-01-2.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
+    "sizes": [],
+    "featured": true,
+    "newArrival": true
+  },
+  {
+    "id": 16,
+    "name": "Statement Cocktail Ring",
+    "price": 900,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-02-1.jpg",
+      "/uploads/jewelry-02-2.jpg",
+      "/uploads/jewelry-02-3.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
+    "sizes": [],
+    "featured": true,
     "newArrival": true
   },
   {
     "id": 17,
-    "name": "Vintage Clasp Doctor Bag",
-    "price": 5100,
-    "category": "bags",
-    "images": ["/uploads/product59.jpg", "/uploads/product60.jpg", "/uploads/product61.jpg"],
-    "description": "Vintage-inspired doctor bag with ornate clasp and top carry handle. Old-world charm meets modern style.",
-    "colors": ["Burgundy", "Black", "Brown"],
+    "name": "Stacked Stone Rings",
+    "price": 1000,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-03-1.jpg",
+      "/uploads/jewelry-03-2.jpg",
+      "/uploads/jewelry-03-3.jpg",
+      "/uploads/jewelry-03-4.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
     "sizes": [],
     "featured": true,
-    "newArrival": false
+    "newArrival": true
   },
   {
     "id": 18,
-    "name": "Gold Accent Messenger",
-    "price": 3600,
-    "category": "bags",
-    "images": ["/uploads/product62.jpg", "/uploads/product63.jpg", "/uploads/product64.jpg", "/uploads/product65.jpg"],
-    "description": "Compact messenger bag with brushed gold accent plate and adjustable crossbody strap.",
-    "colors": ["Black", "Tan", "Navy"],
+    "name": "Pearl Cluster Ring",
+    "price": 1000,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-04-1.jpg",
+      "/uploads/jewelry-04-2.jpg",
+      "/uploads/jewelry-04-3.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
     "sizes": [],
-    "featured": false,
+    "featured": true,
     "newArrival": true
   },
   {
     "id": 19,
-    "name": "Ribbon Bow Mini Bag",
-    "price": 2500,
-    "category": "bags",
-    "images": ["/uploads/product66.jpg", "/uploads/product67.jpg", "/uploads/product68.jpg", "/uploads/product69.jpg"],
-    "description": "Adorable mini bag with oversized ribbon bow detail. Sweet and sophisticated.",
-    "colors": ["Pink", "White", "Black"],
+    "name": "Geometric Gold Ring",
+    "price": 1100,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-05-1.jpg",
+      "/uploads/jewelry-05-2.jpg",
+      "/uploads/jewelry-05-3.jpg",
+      "/uploads/jewelry-05-4.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
     "sizes": [],
-    "featured": true,
+    "featured": false,
     "newArrival": true
   },
   {
     "id": 20,
-    "name": "Emerald Velvet Clutch",
-    "price": 3300,
-    "category": "bags",
-    "images": ["/uploads/product70.jpg", "/uploads/product71.jpg", "/uploads/product72.jpg"],
-    "description": "Rich emerald velvet clutch with jewelled clasp. The perfect statement for evening wear.",
-    "colors": ["Emerald", "Navy", "Black"],
+    "name": "Floral Enamel Ring",
+    "price": 1200,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-06-1.jpg",
+      "/uploads/jewelry-06-2.jpg",
+      "/uploads/jewelry-06-3.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": true
+  },
+  {
+    "id": 21,
+    "name": "Bold Heart Ring",
+    "price": 1300,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-07-1.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
     "sizes": [],
     "featured": false,
     "newArrival": false
   },
   {
-    "id": 21,
-    "name": "Woven Leather Bucket Bag",
-    "price": 4900,
-    "category": "bags",
-    "images": ["/uploads/product73.jpg", "/uploads/product74.jpg", "/uploads/product75.jpg"],
-    "description": "Artisanal woven leather bucket bag with drawstring closure. Effortless bohemian luxury.",
-    "colors": ["Tan", "Brown", "Black"],
+    "id": 22,
+    "name": "Crystal Halo Ring",
+    "price": 1400,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-08-1.jpg",
+      "/uploads/jewelry-08-2.jpg",
+      "/uploads/jewelry-08-3.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 23,
+    "name": "Mixed-Stone Ring Set",
+    "price": 1500,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-09-1.jpg",
+      "/uploads/jewelry-09-2.jpg",
+      "/uploads/jewelry-09-3.jpg",
+      "/uploads/jewelry-09-4.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 24,
+    "name": "Vintage Signet Ring",
+    "price": 1500,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-10-1.jpg",
+      "/uploads/jewelry-10-2.jpg",
+      "/uploads/jewelry-10-3.jpg",
+      "/uploads/jewelry-10-4.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 25,
+    "name": "Charm Bracelet Set",
+    "price": 1600,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-11-1.jpg",
+      "/uploads/jewelry-11-2.jpg",
+      "/uploads/jewelry-11-3.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 26,
+    "name": "Layered Gold Bracelet",
+    "price": 1700,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-12-1.jpg",
+      "/uploads/jewelry-12-2.jpg",
+      "/uploads/jewelry-12-3.jpg",
+      "/uploads/jewelry-12-4.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 27,
+    "name": "Tennis Bracelet",
+    "price": 1800,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-13-1.jpg",
+      "/uploads/jewelry-13-2.jpg",
+      "/uploads/jewelry-13-3.jpg",
+      "/uploads/jewelry-13-4.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 28,
+    "name": "Clover Link Bracelet",
+    "price": 1900,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-14-1.jpg",
+      "/uploads/jewelry-14-2.jpg",
+      "/uploads/jewelry-14-3.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 29,
+    "name": "Cuban Chain Bracelet",
+    "price": 2000,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-15-1.jpg",
+      "/uploads/jewelry-15-2.jpg",
+      "/uploads/jewelry-15-3.jpg",
+      "/uploads/jewelry-15-4.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 30,
+    "name": "Beaded Gold Bracelet",
+    "price": 2000,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-16-1.jpg",
+      "/uploads/jewelry-16-2.jpg",
+      "/uploads/jewelry-16-3.jpg",
+      "/uploads/jewelry-16-4.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 31,
+    "name": "Tinted Square Shades",
+    "price": 1200,
+    "category": "sunglasses",
+    "images": [
+      "/uploads/sunglasses-01-1.jpg",
+      "/uploads/sunglasses-01-2.jpg",
+      "/uploads/sunglasses-01-3.jpg"
+    ],
+    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
+    "colors": [],
     "sizes": [],
     "featured": true,
     "newArrival": true
   },
   {
-    "id": 22,
-    "name": "Crystal Clasp Minaudière",
-    "price": 3700,
-    "category": "bags",
-    "images": ["/uploads/product76.jpg", "/uploads/product77.jpg", "/uploads/product78.jpg"],
-    "description": "Dazzling minaudière with crystal-encrusted clasp and satin lining. For nights that sparkle.",
-    "colors": ["Gold", "Silver", "Rose Gold"],
+    "id": 32,
+    "name": "Cat-Eye Sunglasses",
+    "price": 1300,
+    "category": "sunglasses",
+    "images": [
+      "/uploads/sunglasses-02-1.jpg",
+      "/uploads/sunglasses-02-2.jpg",
+      "/uploads/sunglasses-02-3.jpg"
+    ],
+    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
+    "colors": [],
+    "sizes": [],
+    "featured": true,
+    "newArrival": true
+  },
+  {
+    "id": 33,
+    "name": "Round Frame Shades",
+    "price": 1400,
+    "category": "sunglasses",
+    "images": [
+      "/uploads/sunglasses-03-1.jpg",
+      "/uploads/sunglasses-03-2.jpg",
+      "/uploads/sunglasses-03-3.jpg"
+    ],
+    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
+    "colors": [],
+    "sizes": [],
+    "featured": true,
+    "newArrival": true
+  },
+  {
+    "id": 34,
+    "name": "Oversized Black Shades",
+    "price": 1500,
+    "category": "sunglasses",
+    "images": [
+      "/uploads/sunglasses-04-1.jpg",
+      "/uploads/sunglasses-04-2.jpg",
+      "/uploads/sunglasses-04-3.jpg",
+      "/uploads/sunglasses-04-4.jpg"
+    ],
+    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
+    "colors": [],
+    "sizes": [],
+    "featured": true,
+    "newArrival": true
+  },
+  {
+    "id": 35,
+    "name": "Classic Aviator",
+    "price": 1600,
+    "category": "sunglasses",
+    "images": [
+      "/uploads/sunglasses-05-1.jpg",
+      "/uploads/sunglasses-05-2.jpg",
+      "/uploads/sunglasses-05-3.jpg"
+    ],
+    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
+    "colors": [],
     "sizes": [],
     "featured": false,
     "newArrival": true
   },
   {
-    "id": 23,
-    "name": "Caramel Saddle Bag",
-    "price": 4300,
-    "category": "bags",
-    "images": ["/uploads/product79.jpg", "/uploads/product80.jpg", "/uploads/product81.jpg"],
-    "description": "Warm caramel saddle bag with curved flap and antique brass hardware. Western elegance redefined.",
-    "colors": ["Caramel", "Brown", "Black"],
+    "id": 36,
+    "name": "Retro Browline Shades",
+    "price": 1700,
+    "category": "sunglasses",
+    "images": [
+      "/uploads/sunglasses-06-1.jpg",
+      "/uploads/sunglasses-06-2.jpg",
+      "/uploads/sunglasses-06-3.jpg",
+      "/uploads/sunglasses-06-4.jpg"
+    ],
+    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": true
+  },
+  {
+    "id": 37,
+    "name": "Bold Hexagon Shades",
+    "price": 1800,
+    "category": "sunglasses",
+    "images": [
+      "/uploads/sunglasses-07-1.jpg",
+      "/uploads/sunglasses-07-2.jpg",
+      "/uploads/sunglasses-07-3.jpg"
+    ],
+    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 38,
+    "name": "Slim Rectangle Frames",
+    "price": 1800,
+    "category": "sunglasses",
+    "images": [
+      "/uploads/sunglasses-08-1.jpg",
+      "/uploads/sunglasses-08-2.jpg",
+      "/uploads/sunglasses-08-3.jpg",
+      "/uploads/sunglasses-08-4.jpg"
+    ],
+    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 39,
+    "name": "Vintage Round Shades",
+    "price": 1900,
+    "category": "sunglasses",
+    "images": [
+      "/uploads/sunglasses-09-1.jpg",
+      "/uploads/sunglasses-09-2.jpg",
+      "/uploads/sunglasses-09-3.jpg",
+      "/uploads/sunglasses-09-4.jpg"
+    ],
+    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 40,
+    "name": "Designer Cat-Eye",
+    "price": 2000,
+    "category": "sunglasses",
+    "images": [
+      "/uploads/sunglasses-10-1.jpg",
+      "/uploads/sunglasses-10-2.jpg",
+      "/uploads/sunglasses-10-3.jpg"
+    ],
+    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 41,
+    "name": "Modern Square Frames",
+    "price": 2100,
+    "category": "sunglasses",
+    "images": [
+      "/uploads/sunglasses-11-1.jpg",
+      "/uploads/sunglasses-11-2.jpg",
+      "/uploads/sunglasses-11-3.jpg"
+    ],
+    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 42,
+    "name": "Pearl-Accent Shades",
+    "price": 2200,
+    "category": "sunglasses",
+    "images": [
+      "/uploads/sunglasses-12-1.jpg",
+      "/uploads/sunglasses-12-2.jpg",
+      "/uploads/sunglasses-12-3.jpg"
+    ],
+    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 43,
+    "name": "Mirror Lens Aviator",
+    "price": 2300,
+    "category": "sunglasses",
+    "images": [
+      "/uploads/sunglasses-13-1.jpg",
+      "/uploads/sunglasses-13-2.jpg",
+      "/uploads/sunglasses-13-3.jpg"
+    ],
+    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 44,
+    "name": "Two-Tone Shades",
+    "price": 2400,
+    "category": "sunglasses",
+    "images": [
+      "/uploads/sunglasses-14-1.jpg",
+      "/uploads/sunglasses-14-2.jpg",
+      "/uploads/sunglasses-14-3.jpg",
+      "/uploads/sunglasses-14-4.jpg"
+    ],
+    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 45,
+    "name": "Statement Oval Frames",
+    "price": 2500,
+    "category": "sunglasses",
+    "images": [
+      "/uploads/sunglasses-15-1.jpg",
+      "/uploads/sunglasses-15-2.jpg",
+      "/uploads/sunglasses-15-3.jpg",
+      "/uploads/sunglasses-15-4.jpg"
+    ],
+    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 46,
+    "name": "Casio G-Shock Sport",
+    "price": 1800,
+    "category": "watches",
+    "images": [
+      "/uploads/watches-01-1.jpg"
+    ],
+    "description": "Precision movement set in a statement case. Built to be worn every day, styled for any occasion.",
+    "colors": [],
     "sizes": [],
     "featured": true,
+    "newArrival": true
+  },
+  {
+    "id": 47,
+    "name": "Classic Leather Watch",
+    "price": 2000,
+    "category": "watches",
+    "images": [
+      "/uploads/watches-02-1.jpg",
+      "/uploads/watches-02-2.jpg",
+      "/uploads/watches-02-3.jpg"
+    ],
+    "description": "Precision movement set in a statement case. Built to be worn every day, styled for any occasion.",
+    "colors": [],
+    "sizes": [],
+    "featured": true,
+    "newArrival": true
+  },
+  {
+    "id": 48,
+    "name": "Rose Gold Chronograph",
+    "price": 2200,
+    "category": "watches",
+    "images": [
+      "/uploads/watches-03-1.jpg",
+      "/uploads/watches-03-2.jpg",
+      "/uploads/watches-03-3.jpg"
+    ],
+    "description": "Precision movement set in a statement case. Built to be worn every day, styled for any occasion.",
+    "colors": [],
+    "sizes": [],
+    "featured": true,
+    "newArrival": true
+  },
+  {
+    "id": 49,
+    "name": "Dual-Time Sport Watch",
+    "price": 2400,
+    "category": "watches",
+    "images": [
+      "/uploads/watches-04-1.jpg",
+      "/uploads/watches-04-2.jpg",
+      "/uploads/watches-04-3.jpg",
+      "/uploads/watches-04-4.jpg"
+    ],
+    "description": "Precision movement set in a statement case. Built to be worn every day, styled for any occasion.",
+    "colors": [],
+    "sizes": [],
+    "featured": true,
+    "newArrival": true
+  },
+  {
+    "id": 50,
+    "name": "Vintage Dial Watch",
+    "price": 2600,
+    "category": "watches",
+    "images": [
+      "/uploads/watches-05-1.jpg",
+      "/uploads/watches-05-2.jpg",
+      "/uploads/watches-05-3.jpg"
+    ],
+    "description": "Precision movement set in a statement case. Built to be worn every day, styled for any occasion.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": true
+  },
+  {
+    "id": 51,
+    "name": "Steel Bracelet Watch",
+    "price": 2800,
+    "category": "watches",
+    "images": [
+      "/uploads/watches-06-1.jpg",
+      "/uploads/watches-06-2.jpg",
+      "/uploads/watches-06-3.jpg",
+      "/uploads/watches-06-4.jpg"
+    ],
+    "description": "Precision movement set in a statement case. Built to be worn every day, styled for any occasion.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": true
+  },
+  {
+    "id": 52,
+    "name": "Military Field Watch",
+    "price": 3000,
+    "category": "watches",
+    "images": [
+      "/uploads/watches-07-1.jpg",
+      "/uploads/watches-07-2.jpg",
+      "/uploads/watches-07-3.jpg"
+    ],
+    "description": "Precision movement set in a statement case. Built to be worn every day, styled for any occasion.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 53,
+    "name": "Minimalist Dress Watch",
+    "price": 3100,
+    "category": "watches",
+    "images": [
+      "/uploads/watches-08-1.jpg",
+      "/uploads/watches-08-2.jpg",
+      "/uploads/watches-08-3.jpg",
+      "/uploads/watches-08-4.jpg"
+    ],
+    "description": "Precision movement set in a statement case. Built to be worn every day, styled for any occasion.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 54,
+    "name": "Chunky Resin Watch",
+    "price": 3300,
+    "category": "watches",
+    "images": [
+      "/uploads/watches-09-1.jpg",
+      "/uploads/watches-09-2.jpg",
+      "/uploads/watches-09-3.jpg",
+      "/uploads/watches-09-4.jpg"
+    ],
+    "description": "Precision movement set in a statement case. Built to be worn every day, styled for any occasion.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 55,
+    "name": "Gold Tone Chronograph",
+    "price": 3500,
+    "category": "watches",
+    "images": [
+      "/uploads/watches-10-1.jpg",
+      "/uploads/watches-10-2.jpg",
+      "/uploads/watches-10-3.jpg"
+    ],
+    "description": "Precision movement set in a statement case. Built to be worn every day, styled for any occasion.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 56,
+    "name": "Black Stealth Watch",
+    "price": 3700,
+    "category": "watches",
+    "images": [
+      "/uploads/watches-11-1.jpg",
+      "/uploads/watches-11-2.jpg",
+      "/uploads/watches-11-3.jpg",
+      "/uploads/watches-11-4.jpg"
+    ],
+    "description": "Precision movement set in a statement case. Built to be worn every day, styled for any occasion.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 57,
+    "name": "Silver Mesh Watch",
+    "price": 3900,
+    "category": "watches",
+    "images": [
+      "/uploads/watches-12-1.jpg",
+      "/uploads/watches-12-2.jpg",
+      "/uploads/watches-12-3.jpg"
+    ],
+    "description": "Precision movement set in a statement case. Built to be worn every day, styled for any occasion.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 58,
+    "name": "Crimson Dial Watch",
+    "price": 4100,
+    "category": "watches",
+    "images": [
+      "/uploads/watches-13-1.jpg",
+      "/uploads/watches-13-2.jpg",
+      "/uploads/watches-13-3.jpg",
+      "/uploads/watches-13-4.jpg"
+    ],
+    "description": "Precision movement set in a statement case. Built to be worn every day, styled for any occasion.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 59,
+    "name": "Olive Tactical Watch",
+    "price": 4300,
+    "category": "watches",
+    "images": [
+      "/uploads/watches-14-1.jpg",
+      "/uploads/watches-14-2.jpg",
+      "/uploads/watches-14-3.jpg"
+    ],
+    "description": "Precision movement set in a statement case. Built to be worn every day, styled for any occasion.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 60,
+    "name": "Two-Tone Steel Watch",
+    "price": 4500,
+    "category": "watches",
+    "images": [
+      "/uploads/watches-15-1.jpg",
+      "/uploads/watches-15-2.jpg",
+      "/uploads/watches-15-3.jpg"
+    ],
+    "description": "Precision movement set in a statement case. Built to be worn every day, styled for any occasion.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
     "newArrival": false
   }
 ]
