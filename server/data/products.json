@@ -235,7 +235,8 @@
     "category": "jewelry",
     "images": [
       "/uploads/jewelry-01-1.jpg",
-      "/uploads/jewelry-01-2.jpg"
+      "/uploads/jewelry-01-2.jpg",
+      "/uploads/jewelry-01-3.jpg"
     ],
     "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
     "colors": [],
@@ -251,7 +252,8 @@
     "images": [
       "/uploads/jewelry-02-1.jpg",
       "/uploads/jewelry-02-2.jpg",
-      "/uploads/jewelry-02-3.jpg"
+      "/uploads/jewelry-02-3.jpg",
+      "/uploads/jewelry-02-4.jpg"
     ],
     "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
     "colors": [],
@@ -300,8 +302,7 @@
     "images": [
       "/uploads/jewelry-05-1.jpg",
       "/uploads/jewelry-05-2.jpg",
-      "/uploads/jewelry-05-3.jpg",
-      "/uploads/jewelry-05-4.jpg"
+      "/uploads/jewelry-05-3.jpg"
     ],
     "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
     "colors": [],
@@ -331,7 +332,9 @@
     "price": 1300,
     "category": "jewelry",
     "images": [
-      "/uploads/jewelry-07-1.jpg"
+      "/uploads/jewelry-07-1.jpg",
+      "/uploads/jewelry-07-2.jpg",
+      "/uploads/jewelry-07-3.jpg"
     ],
     "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
     "colors": [],
@@ -347,7 +350,8 @@
     "images": [
       "/uploads/jewelry-08-1.jpg",
       "/uploads/jewelry-08-2.jpg",
-      "/uploads/jewelry-08-3.jpg"
+      "/uploads/jewelry-08-3.jpg",
+      "/uploads/jewelry-08-4.jpg"
     ],
     "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
     "colors": [],
@@ -379,9 +383,7 @@
     "category": "jewelry",
     "images": [
       "/uploads/jewelry-10-1.jpg",
-      "/uploads/jewelry-10-2.jpg",
-      "/uploads/jewelry-10-3.jpg",
-      "/uploads/jewelry-10-4.jpg"
+      "/uploads/jewelry-10-2.jpg"
     ],
     "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
     "colors": [],
@@ -430,8 +432,7 @@
     "images": [
       "/uploads/jewelry-13-1.jpg",
       "/uploads/jewelry-13-2.jpg",
-      "/uploads/jewelry-13-3.jpg",
-      "/uploads/jewelry-13-4.jpg"
+      "/uploads/jewelry-13-3.jpg"
     ],
     "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
     "colors": [],
@@ -447,7 +448,8 @@
     "images": [
       "/uploads/jewelry-14-1.jpg",
       "/uploads/jewelry-14-2.jpg",
-      "/uploads/jewelry-14-3.jpg"
+      "/uploads/jewelry-14-3.jpg",
+      "/uploads/jewelry-14-4.jpg"
     ],
     "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
     "colors": [],
@@ -463,8 +465,7 @@
     "images": [
       "/uploads/jewelry-15-1.jpg",
       "/uploads/jewelry-15-2.jpg",
-      "/uploads/jewelry-15-3.jpg",
-      "/uploads/jewelry-15-4.jpg"
+      "/uploads/jewelry-15-3.jpg"
     ],
     "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
     "colors": [],
@@ -478,10 +479,7 @@
     "price": 2000,
     "category": "jewelry",
     "images": [
-      "/uploads/jewelry-16-1.jpg",
-      "/uploads/jewelry-16-2.jpg",
-      "/uploads/jewelry-16-3.jpg",
-      "/uploads/jewelry-16-4.jpg"
+      "/uploads/jewelry-16-1.jpg"
     ],
     "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
     "colors": [],
@@ -491,6 +489,122 @@
   },
   {
     "id": 31,
+    "name": "Heart Pendant Necklace",
+    "price": 2100,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-17-1.jpg",
+      "/uploads/jewelry-17-2.jpg",
+      "/uploads/jewelry-17-3.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 32,
+    "name": "Double Chain Necklace",
+    "price": 2200,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-18-1.jpg",
+      "/uploads/jewelry-18-2.jpg",
+      "/uploads/jewelry-18-3.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 33,
+    "name": "Initial Charm Necklace",
+    "price": 2300,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-19-1.jpg",
+      "/uploads/jewelry-19-2.jpg",
+      "/uploads/jewelry-19-3.jpg",
+      "/uploads/jewelry-19-4.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 34,
+    "name": "Layered Coin Necklace",
+    "price": 2400,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-20-1.jpg",
+      "/uploads/jewelry-20-2.jpg",
+      "/uploads/jewelry-20-3.jpg",
+      "/uploads/jewelry-20-4.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 35,
+    "name": "Crystal Drop Necklace",
+    "price": 2500,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-21-1.jpg",
+      "/uploads/jewelry-21-2.jpg",
+      "/uploads/jewelry-21-3.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 36,
+    "name": "Gold Pendant Necklace",
+    "price": 2500,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-22-1.jpg",
+      "/uploads/jewelry-22-2.jpg",
+      "/uploads/jewelry-22-3.jpg",
+      "/uploads/jewelry-22-4.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 37,
+    "name": "Choker Chain Set",
+    "price": 2600,
+    "category": "jewelry",
+    "images": [
+      "/uploads/jewelry-23-1.jpg",
+      "/uploads/jewelry-23-2.jpg",
+      "/uploads/jewelry-23-3.jpg",
+      "/uploads/jewelry-23-4.jpg"
+    ],
+    "description": "Crafted from hypoallergenic alloy with a lasting gold-tone finish. Layer it, stack it, gift it.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 38,
     "name": "Tinted Square Shades",
     "price": 1200,
     "category": "sunglasses",
@@ -506,7 +620,7 @@
     "newArrival": true
   },
   {
-    "id": 32,
+    "id": 39,
     "name": "Cat-Eye Sunglasses",
     "price": 1300,
     "category": "sunglasses",
@@ -522,7 +636,7 @@
     "newArrival": true
   },
   {
-    "id": 33,
+    "id": 40,
     "name": "Round Frame Shades",
     "price": 1400,
     "category": "sunglasses",
@@ -538,7 +652,7 @@
     "newArrival": true
   },
   {
-    "id": 34,
+    "id": 41,
     "name": "Oversized Black Shades",
     "price": 1500,
     "category": "sunglasses",
@@ -555,7 +669,7 @@
     "newArrival": true
   },
   {
-    "id": 35,
+    "id": 42,
     "name": "Classic Aviator",
     "price": 1600,
     "category": "sunglasses",
@@ -571,7 +685,7 @@
     "newArrival": true
   },
   {
-    "id": 36,
+    "id": 43,
     "name": "Retro Browline Shades",
     "price": 1700,
     "category": "sunglasses",
@@ -588,155 +702,7 @@
     "newArrival": true
   },
   {
-    "id": 37,
-    "name": "Bold Hexagon Shades",
-    "price": 1800,
-    "category": "sunglasses",
-    "images": [
-      "/uploads/sunglasses-07-1.jpg",
-      "/uploads/sunglasses-07-2.jpg",
-      "/uploads/sunglasses-07-3.jpg"
-    ],
-    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
-    "colors": [],
-    "sizes": [],
-    "featured": false,
-    "newArrival": false
-  },
-  {
-    "id": 38,
-    "name": "Slim Rectangle Frames",
-    "price": 1800,
-    "category": "sunglasses",
-    "images": [
-      "/uploads/sunglasses-08-1.jpg",
-      "/uploads/sunglasses-08-2.jpg",
-      "/uploads/sunglasses-08-3.jpg",
-      "/uploads/sunglasses-08-4.jpg"
-    ],
-    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
-    "colors": [],
-    "sizes": [],
-    "featured": false,
-    "newArrival": false
-  },
-  {
-    "id": 39,
-    "name": "Vintage Round Shades",
-    "price": 1900,
-    "category": "sunglasses",
-    "images": [
-      "/uploads/sunglasses-09-1.jpg",
-      "/uploads/sunglasses-09-2.jpg",
-      "/uploads/sunglasses-09-3.jpg",
-      "/uploads/sunglasses-09-4.jpg"
-    ],
-    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
-    "colors": [],
-    "sizes": [],
-    "featured": false,
-    "newArrival": false
-  },
-  {
-    "id": 40,
-    "name": "Designer Cat-Eye",
-    "price": 2000,
-    "category": "sunglasses",
-    "images": [
-      "/uploads/sunglasses-10-1.jpg",
-      "/uploads/sunglasses-10-2.jpg",
-      "/uploads/sunglasses-10-3.jpg"
-    ],
-    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
-    "colors": [],
-    "sizes": [],
-    "featured": false,
-    "newArrival": false
-  },
-  {
-    "id": 41,
-    "name": "Modern Square Frames",
-    "price": 2100,
-    "category": "sunglasses",
-    "images": [
-      "/uploads/sunglasses-11-1.jpg",
-      "/uploads/sunglasses-11-2.jpg",
-      "/uploads/sunglasses-11-3.jpg"
-    ],
-    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
-    "colors": [],
-    "sizes": [],
-    "featured": false,
-    "newArrival": false
-  },
-  {
-    "id": 42,
-    "name": "Pearl-Accent Shades",
-    "price": 2200,
-    "category": "sunglasses",
-    "images": [
-      "/uploads/sunglasses-12-1.jpg",
-      "/uploads/sunglasses-12-2.jpg",
-      "/uploads/sunglasses-12-3.jpg"
-    ],
-    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
-    "colors": [],
-    "sizes": [],
-    "featured": false,
-    "newArrival": false
-  },
-  {
-    "id": 43,
-    "name": "Mirror Lens Aviator",
-    "price": 2300,
-    "category": "sunglasses",
-    "images": [
-      "/uploads/sunglasses-13-1.jpg",
-      "/uploads/sunglasses-13-2.jpg",
-      "/uploads/sunglasses-13-3.jpg"
-    ],
-    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
-    "colors": [],
-    "sizes": [],
-    "featured": false,
-    "newArrival": false
-  },
-  {
     "id": 44,
-    "name": "Two-Tone Shades",
-    "price": 2400,
-    "category": "sunglasses",
-    "images": [
-      "/uploads/sunglasses-14-1.jpg",
-      "/uploads/sunglasses-14-2.jpg",
-      "/uploads/sunglasses-14-3.jpg",
-      "/uploads/sunglasses-14-4.jpg"
-    ],
-    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
-    "colors": [],
-    "sizes": [],
-    "featured": false,
-    "newArrival": false
-  },
-  {
-    "id": 45,
-    "name": "Statement Oval Frames",
-    "price": 2500,
-    "category": "sunglasses",
-    "images": [
-      "/uploads/sunglasses-15-1.jpg",
-      "/uploads/sunglasses-15-2.jpg",
-      "/uploads/sunglasses-15-3.jpg",
-      "/uploads/sunglasses-15-4.jpg"
-    ],
-    "description": "Polished frames with UV-protective lenses. The finishing touch every Wangaré outfit deserves.",
-    "colors": [],
-    "sizes": [],
-    "featured": false,
-    "newArrival": false
-  },
-  {
-    "id": 46,
     "name": "Casio G-Shock Sport",
     "price": 1800,
     "category": "watches",
@@ -750,7 +716,7 @@
     "newArrival": true
   },
   {
-    "id": 47,
+    "id": 45,
     "name": "Classic Leather Watch",
     "price": 2000,
     "category": "watches",
@@ -766,9 +732,9 @@
     "newArrival": true
   },
   {
-    "id": 48,
+    "id": 46,
     "name": "Rose Gold Chronograph",
-    "price": 2200,
+    "price": 2100,
     "category": "watches",
     "images": [
       "/uploads/watches-03-1.jpg",
@@ -782,9 +748,9 @@
     "newArrival": true
   },
   {
-    "id": 49,
+    "id": 47,
     "name": "Dual-Time Sport Watch",
-    "price": 2400,
+    "price": 2300,
     "category": "watches",
     "images": [
       "/uploads/watches-04-1.jpg",
@@ -799,9 +765,9 @@
     "newArrival": true
   },
   {
-    "id": 50,
+    "id": 48,
     "name": "Vintage Dial Watch",
-    "price": 2600,
+    "price": 2500,
     "category": "watches",
     "images": [
       "/uploads/watches-05-1.jpg",
@@ -815,9 +781,9 @@
     "newArrival": true
   },
   {
-    "id": 51,
+    "id": 49,
     "name": "Steel Bracelet Watch",
-    "price": 2800,
+    "price": 2600,
     "category": "watches",
     "images": [
       "/uploads/watches-06-1.jpg",
@@ -832,9 +798,9 @@
     "newArrival": true
   },
   {
-    "id": 52,
+    "id": 50,
     "name": "Military Field Watch",
-    "price": 3000,
+    "price": 2800,
     "category": "watches",
     "images": [
       "/uploads/watches-07-1.jpg",
@@ -848,9 +814,9 @@
     "newArrival": false
   },
   {
-    "id": 53,
+    "id": 51,
     "name": "Minimalist Dress Watch",
-    "price": 3100,
+    "price": 3000,
     "category": "watches",
     "images": [
       "/uploads/watches-08-1.jpg",
@@ -865,9 +831,9 @@
     "newArrival": false
   },
   {
-    "id": 54,
+    "id": 52,
     "name": "Chunky Resin Watch",
-    "price": 3300,
+    "price": 3100,
     "category": "watches",
     "images": [
       "/uploads/watches-09-1.jpg",
@@ -882,9 +848,9 @@
     "newArrival": false
   },
   {
-    "id": 55,
+    "id": 53,
     "name": "Gold Tone Chronograph",
-    "price": 3500,
+    "price": 3300,
     "category": "watches",
     "images": [
       "/uploads/watches-10-1.jpg",
@@ -898,9 +864,9 @@
     "newArrival": false
   },
   {
-    "id": 56,
+    "id": 54,
     "name": "Black Stealth Watch",
-    "price": 3700,
+    "price": 3500,
     "category": "watches",
     "images": [
       "/uploads/watches-11-1.jpg",
@@ -915,9 +881,9 @@
     "newArrival": false
   },
   {
-    "id": 57,
+    "id": 55,
     "name": "Silver Mesh Watch",
-    "price": 3900,
+    "price": 3600,
     "category": "watches",
     "images": [
       "/uploads/watches-12-1.jpg",
@@ -931,9 +897,9 @@
     "newArrival": false
   },
   {
-    "id": 58,
+    "id": 56,
     "name": "Crimson Dial Watch",
-    "price": 4100,
+    "price": 3800,
     "category": "watches",
     "images": [
       "/uploads/watches-13-1.jpg",
@@ -948,9 +914,9 @@
     "newArrival": false
   },
   {
-    "id": 59,
+    "id": 57,
     "name": "Olive Tactical Watch",
-    "price": 4300,
+    "price": 4000,
     "category": "watches",
     "images": [
       "/uploads/watches-14-1.jpg",
@@ -964,14 +930,48 @@
     "newArrival": false
   },
   {
-    "id": 60,
+    "id": 58,
     "name": "Two-Tone Steel Watch",
-    "price": 4500,
+    "price": 4200,
     "category": "watches",
     "images": [
       "/uploads/watches-15-1.jpg",
       "/uploads/watches-15-2.jpg",
       "/uploads/watches-15-3.jpg"
+    ],
+    "description": "Precision movement set in a statement case. Built to be worn every day, styled for any occasion.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 59,
+    "name": "Square Dial Quartz",
+    "price": 4300,
+    "category": "watches",
+    "images": [
+      "/uploads/watches-16-1.jpg",
+      "/uploads/watches-16-2.jpg",
+      "/uploads/watches-16-3.jpg",
+      "/uploads/watches-16-4.jpg"
+    ],
+    "description": "Precision movement set in a statement case. Built to be worn every day, styled for any occasion.",
+    "colors": [],
+    "sizes": [],
+    "featured": false,
+    "newArrival": false
+  },
+  {
+    "id": 60,
+    "name": "Blue Face Dress Watch",
+    "price": 4500,
+    "category": "watches",
+    "images": [
+      "/uploads/watches-17-1.jpg",
+      "/uploads/watches-17-2.jpg",
+      "/uploads/watches-17-3.jpg",
+      "/uploads/watches-17-4.jpg"
     ],
     "description": "Precision movement set in a statement case. Built to be worn every day, styled for any occasion.",
     "colors": [],

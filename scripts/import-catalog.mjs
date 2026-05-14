@@ -19,11 +19,38 @@ function parseName(filename) {
   };
 }
 
+// Explicit per-timestamp classification built from a full visual scan of
+// every base image. Cluster-based heuristics didn't work because WhatsApp
+// resent supplier photos across chat sessions, mixing categories within
+// timestamp clusters (e.g. 10:26 has both sunglasses and necklaces).
+const TIMESTAMP_CATEGORY = {
+  // 10:26 — sunglasses then jewelry
+  "10.26.45": "sunglasses", "10.26.46": "sunglasses", "10.26.47": "sunglasses",
+  "10.26.48": "sunglasses", "10.26.49": "sunglasses", "10.26.50": "sunglasses",
+  "10.26.51": "jewelry",    "10.26.52": "jewelry",    "10.26.53": "jewelry",
+  "10.26.54": "jewelry",    "10.26.55": "jewelry",    "10.26.56": "jewelry",
+  "10.26.57": "jewelry",    "10.26.58": "jewelry",    "10.26.59": "jewelry",
+
+  // 10:35 — all jewelry (rings, earrings, charms, necklaces)
+  "10.35.12": "jewelry", "10.35.13": "jewelry", "10.35.14": "jewelry",
+  "10.35.15": "jewelry", "10.35.16": "jewelry", "10.35.17": "jewelry",
+
+  // 10:37 — jewelry, then 2 watches, more jewelry, then bags
+  "10.37.19": "jewelry", "10.37.20": "jewelry",
+  "10.37.21": "watches", "10.37.22": "watches",
+  "10.37.23": "jewelry", "10.37.24": "jewelry", "10.37.25": "jewelry",
+  "10.37.26": "jewelry", "10.37.27": "jewelry", "10.37.28": "jewelry",
+  "10.37.29": "bags", "10.37.30": "bags", "10.37.31": "bags",
+  "10.37.32": "bags", "10.37.33": "bags", "10.37.34": "bags",
+  "10.37.35": "bags", "10.37.36": "bags", "10.37.37": "bags",
+  "10.37.38": "bags", "10.37.39": "bags", "10.37.40": "bags",
+  "10.37.41": "bags", "10.37.42": "bags",
+};
+
 function categoryFor(parsed) {
-  if (parsed.cluster === "10.26") return "sunglasses";
+  const explicit = TIMESTAMP_CATEGORY[parsed.key];
+  if (explicit) return explicit;
   if (parsed.cluster === "10.29") return "watches";
-  if (parsed.cluster === "10.35") return "jewelry";
-  if (parsed.cluster === "10.37") return parsed.second <= 28 ? "jewelry" : "bags";
   return null;
 }
 
@@ -41,6 +68,7 @@ const NAME_POOL = {
     "Military Field Watch", "Minimalist Dress Watch", "Chunky Resin Watch",
     "Gold Tone Chronograph", "Black Stealth Watch", "Silver Mesh Watch",
     "Crimson Dial Watch", "Olive Tactical Watch", "Two-Tone Steel Watch",
+    "Square Dial Quartz", "Blue Face Dress Watch",
   ],
   jewelry: [
     "Enamel Flower Ring", "Statement Cocktail Ring", "Stacked Stone Rings",
